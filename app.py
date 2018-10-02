@@ -4,8 +4,11 @@ import json
 
 app = Flask(__name__)
 
-
 @app.route("/")
+def index():
+  return render_template("index.html")
+
+@app.route("/riddles")
 def show_riddles():
   data = []
   question_number=1
@@ -14,7 +17,7 @@ def show_riddles():
   return render_template('riddle.html', riddles = data, question_number=question_number)
 
 
-@app.route("/", methods=["POST"])
+@app.route("/riddles", methods=["POST"])
 def check_answer():
   correct_answer=request.form.get("correct_answer")
   user_answer=request.form.get("guess")

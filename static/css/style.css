@@ -7,6 +7,20 @@ body {
   height: 100px;
 }
 
+.content {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  border-radius: 20px;
+  min-height: 80vh;
+}
+
+a {
+  color: rgb(255, 193, 7)
+}
+
+
+
+
 .form-group input {
   display: none;
 }
