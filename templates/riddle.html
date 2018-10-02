@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {% block content %}
-
+<p><strong>Reminder:</strong> The sphinx looks for a specific keyword in your answer. You can phrase it any way you like: A full sentence, a phrase, a few words or if you're feeling very brave, try and guess the sphinx' expected keyword!</p>
 {% for riddle in riddles %}
 {% if question_number == loop.index %}
 <p>{{loop.index}}. {{riddle.riddle}}</p>

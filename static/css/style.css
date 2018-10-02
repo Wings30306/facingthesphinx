@@ -14,8 +14,13 @@ body {
   min-height: 80vh;
 }
 
-a {
+a, strong {
   color: rgb(255, 193, 7)
+}
+
+a:hover {
+  color: rgb(167, 126, 4);
+  text-decoration: none;
 }
 
 
