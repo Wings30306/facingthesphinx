@@ -2,3 +2,15 @@ body {
   background: lightblue url("../images/ancient-art-cosmos-262786.jpg") no-repeat fixed center; 
   color: #ffffff;
 }
+
+.spacing-for-fixed-nav {
+  height: 100px;
+}
+
+.form-group input {
+  display: none;
+}
+
+.form-group .field {
+  width: 100%;
+}
