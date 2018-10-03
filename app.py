@@ -40,7 +40,7 @@ def register():
     with open("data/users.txt", "r") as file:
         active_users = file.read().splitlines()
         if user in active_users:
-            register_message = "Sorry, this username is taken. Please choose a different username. Are you already a user? "
+            register_message = "Sorry, this username is taken. Please choose a different username.\nAre you already a user? "
         else:
             file = open("data/users.txt", "a")
             file.write(user + "\n")
@@ -48,39 +48,40 @@ def register():
         return render_template("register.html", register_message=register_message)
 
 
-@app.route("/riddles/question<question_number>/<score>")
-def show_riddles(score, question_number):
+@app.route("/riddles/<user>/question<question_number>/<score>")
+def show_riddles(user, score, question_number):
     data = []
-    question_number = 1
+    question_number=question_number
     with open("data/riddles.json", "r", encoding="utf-8") as riddle_data:
         data = json.load(riddle_data)["riddles"]
     return render_template('riddle.html', riddles=data, question_number=question_number, score=score)
 
 
-@app.route("/riddles/question<question_number>/<score>", methods=["POST"])
-def check_answer(score, question_number):
+@app.route("/riddles/<user>/question<question_number>/<score>", methods=["POST"])
+def check_answer(score, question_number, user):
     correct_answer = request.form.get("correct_answer")
     score = int(score)
-    user_answer = request.form.get("guess")
+    user_answer = request.form.get("guess").lower()
     if correct_answer in user_answer:
         message = "correct"
         score += 1
     else:
         message = "wrong"
-    return redirect(url_for("next_question", message=message, user_answer=user_answer, correct_answer=correct_answer, score=score, question_number=question_number))
+    return redirect(url_for("answer_result", user=user, message=message, user_answer=user_answer, correct_answer=correct_answer, score=score, question_number=question_number))
 
 
-@app.route("/answers/question<question_number>/<score>/<message>/<user_answer>/<correct_answer>")
-def answer_result(message, user_answer, correct_answer, score, question_number):
-    return render_template("answer.html", message=message, user_answer=user_answer, correct_answer=correct_answer, score=score, question_number=question_number)
+@app.route("/answers/<user>/question<question_number>/<score>/<message>/<user_answer>/<correct_answer>")
+def answer_result(user, message, user_answer, correct_answer, score, question_number):
+    return render_template("answer.html", message=message, user_answer=user_answer, correct_answer=correct_answer, score=score, question_number=question_number, user=user)
 
 
-@app.route("/answers/question<question_number>/<score>", methods=["POST"])
-def next_question(question_number, score):
+@app.route("/answers/<user>/question<question_number>/<score>/<message>/<user_answer>/<correct_answer>", methods=["POST"])
+def next_question(question_number, score, user, message, user_answer, correct_answer):
     question_number = int(question_number)
     question_number += 1
     score = score
-    return redirect(url_for("show_riddles", question_number=question_number, score=score))
+    user = user
+    return redirect(f"/riddles/{user}/question{question_number}/{score}")
 
 
 if __name__ == "__main__":
