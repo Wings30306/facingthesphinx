@@ -95,6 +95,12 @@ def player_score_write_to_LB(score, user, message, user_answer, correct_answer):
         leaderboard["users"].append(player_score)
         with open("data/score.json", "w") as score_data_updated:
             json.dump(leaderboard, score_data_updated, indent=2)
+    return redirect(url_for('show_LB'))
+
+
+@app.route("/leaderboard")
+def show_LB():
+  return render_template("leaderboard.html")
 
 
 if __name__ == "__main__":
