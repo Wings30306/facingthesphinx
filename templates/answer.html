@@ -1,8 +1,10 @@
 {% extends 'base.html'%}
 {% block content %}
 <p>Your answer was <strong>{{user_answer}}</strong>.</p>
-<p>The Sphinx expected an answer with the keyword <strong>{{correct_answer}}.</strong></p>
-<p>That means your answer was <strong> {{message}}</strong></p>
-
-<button class="btn-warning">Next Question</button>
+<p>The Sphinx expected an answer with the keyword <strong>{{correct_answer}}</strong>.</p>
+<p>That means your answer was <strong> {{message}}</strong>!</p>
+<h5>You have currently answered {{score}} out of {{question_number}} question(s) correctly!</h5>
+<form name="next_question" method="POST" action="next_question">
+  <button type="submit" name="next_question" class="btn-warning">Next Question</button>
+</form>
 {% endblock %}
