@@ -1,10 +1,10 @@
 $(document).ready(function() {
   queue()
-    .defer(d3.json, "../../data/mylibrary.json")
+    .defer(d3.json, "data/score.json")
     .await(charts);
 
-  function charts(error, myLibraryData) {
-    let ndx = crossfilter(myLibraryData);
+  function charts(error, scoreData) {
+    let ndx = crossfilter(scoreData);
 
     showTable(ndx);
 
@@ -19,11 +19,11 @@ $(document).ready(function() {
         return "";
       })
       .columns(["name", "score"])
-      .size(214)
+      .size(10)
       .sortBy(function(d) {
         return d.score;
       })
       .order(d3.descending)
-      .transitionDuration(0);
+      .transitionDuration(0.5);
   }
 });
