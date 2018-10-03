@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+{% block content %}
+
+ <h2>Already registered?<br>Sign in here to play!</h2>
+ <form name="signin" method="POST" action="/signin">
+ 
+  <input type="text" name="username" id="username" placeholder="Your username">
+  <button type="submit" class="btn btn-success" value="signin">Let's answer some riddles!</button>
+  <p class="message">
+  {% if signin_message %}
+  {{ signin_message }}
+  {% endif %}
+  </p>
+
+  <p>
+    <strong>Warning: </strong>This site is not secured, please don't put in privacy-sensitive information! Usernames will be displayed
+    on the leaderboard.</p>
+</form>
+
+{% endblock %}
