@@ -26,7 +26,7 @@ def sign_in():
             return redirect(f"/riddles/{user}/{score}/{question_number}")
         else:
             signin_message = "Sorry, this user is incorrect. New user? Please register."
-            return render_template("index.html", signin_message=signin_message)
+            return render_template("signin.html", signin_message=signin_message)
 
 
 @app.route("/register")
@@ -45,7 +45,7 @@ def register():
             file = open("data/users.txt", "a")
             file.write(user + "\n")
             register_message = "You are now registered. Please sign in to continue."
-        return render_template("index.html", register_message=register_message)
+        return render_template("register.html", register_message=register_message)
 
 
 @app.route("/riddles/question<question_number>/<score>")
