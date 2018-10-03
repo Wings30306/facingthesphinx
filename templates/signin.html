@@ -8,7 +8,7 @@
   <button type="submit" class="btn btn-success" value="signin">Let's answer some riddles!</button>
   <p class="message">
   {% if signin_message %}
-  {{ signin_message }}
+  {{ signin_message }}<a href="{{url_for('register')}}">Register here</a>.
   {% endif %}
   </p>
 

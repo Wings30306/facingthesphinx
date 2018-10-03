@@ -10,7 +10,7 @@
 </form>
 <p class="message">
 {% if register_message %} 
-{{ register_message }} 
+{{ register_message }}<a href="{{url_for('sign_in')}}">Sign In Here</a>
 {% endif %}
 </p>
 <p>

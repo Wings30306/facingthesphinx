@@ -23,9 +23,9 @@ def sign_in():
         question_number = 1
         active_users = file.read().splitlines()
         if user in active_users:
-            return redirect(f"/riddles/{user}/{score}/{question_number}")
+            return redirect(f"/riddles/{user}/question{question_number}/{score}")
         else:
-            signin_message = "Sorry, this user is incorrect. New user? Please register."
+            signin_message = "Sorry, this username is incorrect. New user? "
             return render_template("signin.html", signin_message=signin_message)
 
 
@@ -40,11 +40,11 @@ def register():
     with open("data/users.txt", "r") as file:
         active_users = file.read().splitlines()
         if user in active_users:
-            register_message = "Sorry, this username is taken. Please choose a different username."
+            register_message = "Sorry, this username is taken. Please choose a different username. Are you already a user? "
         else:
             file = open("data/users.txt", "a")
             file.write(user + "\n")
-            register_message = "You are now registered. Please sign in to continue."
+            register_message = "You are now registered. "
         return render_template("register.html", register_message=register_message)
 
 
