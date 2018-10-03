@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "user": "Miro",
+      "score": 19
+    },
+    {
+      "user": "Wings",
+      "score": 18
+    },
+    {
+      "user": "Hermione",
+      "score": 5
+    },
+    {
+      "user": "Hermione",
+      "score": 1
+    },
+    {
+      "user": "Hermione",
+      "score": 3
+    },
+    {
+      "user": "Jo",
+      "score": 20
+    }
+  ]
+}

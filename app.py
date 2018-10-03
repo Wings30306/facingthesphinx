@@ -51,7 +51,7 @@ def register():
 @app.route("/riddles/<user>/question<question_number>/<score>")
 def show_riddles(user, score, question_number):
     data = []
-    question_number=question_number
+    question_number = question_number
     with open("data/riddles.json", "r", encoding="utf-8") as riddle_data:
         data = json.load(riddle_data)["riddles"]
     return render_template('riddle.html', riddles=data, question_number=question_number, score=score)
@@ -82,6 +82,19 @@ def next_question(question_number, score, user, message, user_answer, correct_an
     score = score
     user = user
     return redirect(f"/riddles/{user}/question{question_number}/{score}")
+
+
+@app.route("/answers/<user>/question20/<score>/<message>/<user_answer>/<correct_answer>", methods=["POST"])
+def player_score_write_to_LB(score, user, message, user_answer, correct_answer):
+    score=int(score)
+    player_score = {"user": user, "score": score}
+    player_score = (player_score)
+    with open("data/score.json", "r") as score_data:
+        player_score = {"user": user, "score": score}
+        leaderboard = json.load(score_data)
+        leaderboard["users"].append(player_score)
+        with open("data/score.json", "w") as score_data_updated:
+            json.dump(leaderboard, score_data_updated, indent=2)
 
 
 if __name__ == "__main__":
