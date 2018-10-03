@@ -5,7 +5,7 @@
  <form name="signin" method="POST" action="/signin">
  
   <input type="text" name="username" id="username" placeholder="Your username">
-  <button type="submit" class="btn btn-warning" value="signin">Let's answer some riddles!</button>
+  <button type="submit" class="btn btn-warning" value="signin" required>Let's answer some riddles!</button>
   <p class="message">
   {% if signin_message %}
   {{ signin_message }}<a href="{{url_for('register')}}">Register here</a>.

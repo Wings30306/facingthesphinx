@@ -30,7 +30,7 @@ form input, form textarea{
 }
 
 
-.form-group input {
+.hidden {
   display: none;
 }
 
