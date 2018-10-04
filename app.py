@@ -100,7 +100,9 @@ def player_score_write_to_LB(score, user, message, user_answer, correct_answer):
 
 @app.route("/leaderboard")
 def show_LB():
-  return render_template("leaderboard.html")
+  with open("data/score.json", "r", encoding="utf-8") as score_data:
+    data = json.load(score_data)["users"]
+  return render_template("leaderboard.html", scores=data)
 
 
 if __name__ == "__main__":

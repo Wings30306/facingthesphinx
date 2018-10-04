@@ -2,6 +2,18 @@
 {% block content %}
 
 <h2>Leaderboard</h2>
-<table id="leaderboard"></table>
-
+<table>
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Score</th>
+  </tr>
+  {% for user in scores|sort(attribute='score', reverse=True) %}
+  <tr>
+    <td>{{loop.index}}</td>
+    <td>{{user.user}}</td>
+    <td>{{user.score}}</td>
+  </tr>
+  {%endfor%}
+</table>
 {% endblock %}
