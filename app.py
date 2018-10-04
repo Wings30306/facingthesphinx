@@ -1,8 +1,9 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, session
 import json
 
 app = Flask(__name__)
+app.secret_key=os.urandom(24)
 
 
 @app.route("/")
@@ -17,12 +18,14 @@ def show_signin():
 
 @app.route("/signin", methods=["POST"])
 def sign_in():
-    user = request.form["username"]
+    new_user = request.form["username"]
+    score = 0
+    question_number = 1
     with open("data/users.txt", "r") as file:
-        score = 0
-        question_number = 1
         active_users = file.read().splitlines()
-        if user in active_users:
+        if new_user in active_users:
+            session['user'] = new_user
+            user = session['user']
             return redirect(f"/riddles/{user}/question{question_number}/{score}")
         else:
             signin_message = "Sorry, this username is incorrect. New user? "
