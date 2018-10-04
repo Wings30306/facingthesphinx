@@ -3,8 +3,14 @@ body {
   color: #ffffff;
 }
 
+.navbar-brand {
+  font-weight: bold;
+  font-family: cursive;
+  font-size: 1.8em;
+}
+
 .spacing-for-fixed-nav {
-  height: 100px;
+  height: 12vh;
 }
 
 .content {
@@ -41,4 +47,15 @@ form input, form textarea{
 .btn-warning:hover,
 .nav-link:hover{
   font-weight: bold;
+}
+
+table{
+  width: 90%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+}
+
+footer{
+  text-align: center;
 }
