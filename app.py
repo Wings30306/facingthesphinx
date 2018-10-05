@@ -65,7 +65,7 @@ def sign_in():
 @app.route("/riddles/<user>/question<question_number>/<score>")
 def show_riddles(user, score, question_number):
     question_number = question_number
-    with open("data/riddles.json", "r", encoding="utf-8") as riddle_data:
+    with open("data/riddles_shuffled.json", "r", encoding="utf-8") as riddle_data:
         data = json.load(riddle_data)["riddles"]
     return render_template('riddle.html', riddles=data, question_number=question_number, score=score)
 
