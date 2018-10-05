@@ -29,7 +29,7 @@
       <a href="{{url_for('register')}}">Register</a> your chosen username. Usernames are unique and will show up on the leaderboard at the end.
     </li>
     <li>
-        <a href="{{url_for('sign_in')}}">Sign In</a> with your registered unique username.
+        If you have already registered before, <a href="{{url_for('sign_in')}}">log in</a> with your registered unique username.
     </li>
     <li>
       The first riddle will appear. Think carefully about your answer. The Sphinx looks for a specific keyword in your answer. You can phrase it any way you like: A full sentence, a phrase, a few words or if you're feeling very brave, try and guess the Sphinx' expected keyword!
@@ -37,6 +37,8 @@
   </ol>
 </p>
 <p>Are you ready to start?</p>
-<a href="{{url_for('register')}}" class="btn btn-warning">Play Game!</a>
+<a href="{{url_for('register')}}" class="btn btn-warning">Register</a>
+<a href="{{url_for('sign_in')}}" class="btn btn-warning">Log In</a>
+
 
 {% endblock %}
