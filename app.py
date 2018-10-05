@@ -64,7 +64,7 @@ def sign_in():
 
 @app.route("/riddles/<user>/question<question_number>/<score>")
 def show_riddles(user, score, question_number):
-    if user in session:
+    if user == session['user']:
         question_number = question_number
         with open("data/riddles_shuffled.json", "r", encoding="utf-8") as riddle_data:
             data = json.load(riddle_data)["riddles"]
@@ -75,7 +75,7 @@ def show_riddles(user, score, question_number):
 
 @app.route("/riddles/<user>/question<question_number>/<score>", methods=["POST"])
 def check_answer(score, question_number, user):
-    if user in session: 
+    if user == session['user']:
         correct_answer = request.form.get("correct_answer")
         score = int(score)
         user_answer = request.form.get("guess").lower()
@@ -91,12 +91,14 @@ def check_answer(score, question_number, user):
 
 @app.route("/answers/<user>/question<question_number>/<score>/<message>/<user_answer>/<correct_answer>")
 def answer_result(user, message, user_answer, correct_answer, score, question_number):
-    return render_template("answer.html", message=message, user_answer=user_answer, correct_answer=correct_answer, score=score, question_number=question_number, user=user)
-
+    if user == session['user']:
+        return render_template("answer.html", message=message, user_answer=user_answer, correct_answer=correct_answer, score=score, question_number=question_number, user=user)
+    else:
+        return redirect(url_for("index"))
 
 @app.route("/answers/<user>/question<question_number>/<score>/<message>/<user_answer>/<correct_answer>", methods=["POST"])
 def next_question(question_number, score, user, message, user_answer, correct_answer):
-    if user in session: 
+    if user == session['user']:
         question_number = int(question_number)
         question_number += 1
         score = score
@@ -108,7 +110,7 @@ def next_question(question_number, score, user, message, user_answer, correct_an
 
 @app.route("/answers/<user>/question20/<score>/<message>/<user_answer>/<correct_answer>", methods=["POST"])
 def player_score_write_to_LB(score, user, message, user_answer, correct_answer):
-    if user in session:
+    if user == session['user']:
         score=int(score)
         player_score = {"user": user, "score": score}
         player_score = (player_score)
@@ -128,6 +130,9 @@ def show_LB():
   with open("data/score.json", "r", encoding="utf-8") as score_data:
     data = json.load(score_data)["users"]
   return render_template("leaderboard.html", scores=data)
+
+
+
 
 
 if __name__ == "__main__":
