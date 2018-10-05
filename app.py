@@ -132,7 +132,10 @@ def show_LB():
   return render_template("leaderboard.html", scores=data)
 
 
-
+@app.route("/log_out")
+def log_out():
+    session.pop("user", None)
+    return render_template("loggedout.html")
 
 
 if __name__ == "__main__":

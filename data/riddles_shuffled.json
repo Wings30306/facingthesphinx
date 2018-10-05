@@ -1,64 +1,44 @@
 {
   "riddles": [
     {
-      "riddle": "I weaken all men for hours each day. I show you strange visions while you are away. I take you by night, by day take you back. None suffer to have me, but do from my lack. What am I?",
-      "answer": "sleep"
-    },
-    {
-      "riddle": "What always comes but never arrives?",
-      "answer": "tomorrow"
-    },
-    {
-      "riddle": "What is harder to catch the faster you run?",
-      "answer": "breath"
-    },
-    {
       "riddle": "What is broken every time it's spoken?",
       "answer": "silence"
-    },
-    {
-      "riddle": "A woman is sitting alone in her hotel room one night... There is a knock on the door. She answers it to find a man she has never met. 'Oh sorry, I thought this was my hotel room' he says. He turns and walks back along the corridor. The woman closes the door and rings security. What made the woman suspicious?",
-      "answer": "knock"
-    },
-    {
-      "riddle": "Feed me and I live. Give me a drink and I die. What am I?",
-      "answer": "fire"
-    },
-    {
-      "riddle": "You can see me in water, but I can never get wet. What am I?",
-      "answer": "reflection"
-    },
-    {
-      "riddle": "What is easy to get into but hard to get out of?",
-      "answer": "trouble"
-    },
-    {
-      "riddle": "You will always find me in the past. I can be created in the present, but the future will never change me.",
-      "answer": "history"
-    },
-    {
-      "riddle": "A King has no children and no wife, so there is no one to take over the throne when he dies. He must decide on someone in his kingdom to take the throne. He gives each child in the kingdom a seed and tells them he will crown the child with the most beautiful plant at the end.\nAt the end of the contest, the children all came to the castle with their beautiful plants. The King finally decided to appoint a little girl with an empty pot as Queen.\nWhy did he decide on this child and not someone with a beautiful big plant?",
-      "answer": "seeds"
     },
     {
       "riddle": "Two fathers and their two sons go fishing together. They each catch one fish to take home with them. They do not lose any fish, and yet when they arrive at home they only have three fish. How can this be?",
       "answer": "grandfather"
     },
     {
+      "riddle": "What has an eye but cannot see?",
+      "answer": "needle"
+    },
+    {
+      "riddle": "A King has no children and no wife, so there is no one to take over the throne when he dies. He must decide on someone in his kingdom to take the throne. He gives each child in the kingdom a seed and tells them he will crown the child with the most beautiful plant at the end.\nAt the end of the contest, the children all came to the castle with their beautiful plants. The King finally decided to appoint a little girl with an empty pot as Queen.\nWhy did he decide on this child and not someone with a beautiful big plant?",
+      "answer": "seeds"
+    },
+    {
+      "riddle": "I weaken all men for hours each day. I show you strange visions while you are away. I take you by night, by day take you back. None suffer to have me, but do from my lack. What am I?",
+      "answer": "sleep"
+    },
+    {
+      "riddle": "You will always find me in the past. I can be created in the present, but the future will never change me.",
+      "answer": "history"
+    },
+    {
+      "riddle": "What is harder to catch the faster you run?",
+      "answer": "breath"
+    },
+    {
+      "riddle": "I am found in the sea and on land.\nI do not walk or swim.\nI travel by foot but I have no toes.\nNo matter where I go, I\u00e2\u20ac\u2122m never far from home.\nWhat am I?",
+      "answer": "snail"
+    },
+    {
       "riddle": "I have keys that open no locks, space but no room and you can use me to enter but not go in.",
       "answer": "keyboard"
     },
     {
-      "riddle": "A thief enters a shop and threatens the clerk. He demands the clerk opens the safe for him, or he will kill the clerk. The clerk refuses to open the safe, instead he tries talking to the thief. The clerk says 'The code for the safe is different every day' 'If you kill me now, you will never get into the safe.' But the thief managed to get into the safe without the clerk telling him the code, and without killing the clerk. How did he know the code and what was it?",
-      "answer": "different"
-    },
-    {
-      "riddle": "It can be made, It can be told, It can be played, it can be cracked. What is it?",
-      "answer": "joke"
-    },
-    {
-      "riddle": "What can travel around the world but always stays in one corner?",
-      "answer": "stamp"
+      "riddle": "You can see me in water, but I can never get wet. What am I?",
+      "answer": "reflection"
     },
     {
       "riddle": "First think of the person who lives in disguise,\nWho deals in secrets and tells naught but lies.\nNext, tell me what's always the last thing to mend,\nThe middle of middle and end of the end?\nAnd finally give me the sound often heard,\nDuring the search for a hard-to-find word.\nNow string them together and answer me this,\nWhich creature would you be unwilling to kiss?",
@@ -69,16 +49,36 @@
       "answer": "footsteps"
     },
     {
-      "riddle": "What has an eye but cannot see?",
-      "answer": "needle"
-    },
-    {
-      "riddle": "I am found in the sea and on land.\nI do not walk or swim.\nI travel by foot but I have no toes.\nNo matter where I go, I\u00e2\u20ac\u2122m never far from home.\nWhat am I?",
-      "answer": "snail"
+      "riddle": "Feed me and I live. Give me a drink and I die. What am I?",
+      "answer": "fire"
     },
     {
       "riddle": "What has a heart but no other organs?",
       "answer": "cards"
+    },
+    {
+      "riddle": "What always comes but never arrives?",
+      "answer": "tomorrow"
+    },
+    {
+      "riddle": "What can travel around the world but always stays in one corner?",
+      "answer": "stamp"
+    },
+    {
+      "riddle": "It can be made, It can be told, It can be played, it can be cracked. What is it?",
+      "answer": "joke"
+    },
+    {
+      "riddle": "A woman is sitting alone in her hotel room one night... There is a knock on the door. She answers it to find a man she has never met. 'Oh sorry, I thought this was my hotel room' he says. He turns and walks back along the corridor. The woman closes the door and rings security. What made the woman suspicious?",
+      "answer": "knock"
+    },
+    {
+      "riddle": "A thief enters a shop and threatens the clerk. He demands the clerk opens the safe for him, or he will kill the clerk. The clerk refuses to open the safe, instead he tries talking to the thief. The clerk says 'The code for the safe is different every day' 'If you kill me now, you will never get into the safe.' But the thief managed to get into the safe without the clerk telling him the code, and without killing the clerk. How did he know the code and what was it?",
+      "answer": "different"
+    },
+    {
+      "riddle": "What is easy to get into but hard to get out of?",
+      "answer": "trouble"
     }
   ]
 }
