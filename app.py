@@ -1,6 +1,8 @@
 import os
 from flask import Flask, render_template, redirect, request, url_for, session
 import json
+import random
+from shutil import copyfile
 
 app = Flask(__name__)
 app.secret_key=os.urandom(24)
@@ -8,7 +10,35 @@ app.secret_key=os.urandom(24)
 
 @app.route("/")
 def index():
+    copyfile("data/riddles.json", "data/riddles_shuffled.json")
+    with open("data/riddles_shuffled.json", "r") as riddle_data:
+        data = json.load(riddle_data)
+        random.shuffle(data["riddles"])
+        with open("data/riddles_shuffled.json", "w") as riddles_shuffled_updated:
+            json.dump(data, riddles_shuffled_updated, indent=2)
     return render_template("index.html")
+
+
+@app.route("/register")
+def show_register():
+  return render_template("register.html")
+
+
+@app.route("/register", methods=["POST"])
+def register():
+    session['user'] = request.form["new_user"]
+    user = session['user']
+    score = 0
+    question_number = 1
+    with open("data/users.txt", "r") as file:
+        active_users = file.read().splitlines()
+        if user in active_users:
+            register_message = "Sorry, this username is taken. Please choose a different username.\nAre you already registered? "
+        else:
+            file = open("data/users.txt", "a")
+            file.write(user + "\n")
+            return redirect(f"/riddles/{user}/question{question_number}/{score}")
+        return render_template("register.html", register_message=register_message)
 
 
 @app.route("/signin")
@@ -32,28 +62,8 @@ def sign_in():
             return render_template("signin.html", signin_message=signin_message)
 
 
-@app.route("/register")
-def show_register():
-  return render_template("register.html")
-
-
-@app.route("/register", methods=["POST"])
-def register():
-    user = request.form["new_user"]
-    with open("data/users.txt", "r") as file:
-        active_users = file.read().splitlines()
-        if user in active_users:
-            register_message = "Sorry, this username is taken. Please choose a different username.\nAre you already a user? "
-        else:
-            file = open("data/users.txt", "a")
-            file.write(user + "\n")
-            register_message = "You are now registered. "
-        return render_template("register.html", register_message=register_message)
-
-
 @app.route("/riddles/<user>/question<question_number>/<score>")
 def show_riddles(user, score, question_number):
-    data = []
     question_number = question_number
     with open("data/riddles.json", "r", encoding="utf-8") as riddle_data:
         data = json.load(riddle_data)["riddles"]
