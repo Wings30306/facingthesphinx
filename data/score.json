@@ -1,32 +1,16 @@
 {
   "users": [
     {
-      "user": "Miro",
-      "score": 19
+      "user": "Player One",
+      "score": 0
     },
     {
-      "user": "Wings",
-      "score": 18
+      "user": "Player Two",
+      "score": 0
     },
     {
-      "user": "Hermione",
-      "score": 3
-    },
-    {
-      "user": "Jo",
-      "score": 20
-    },
-    {
-      "user": "wings30306",
-      "score": 6
-    },
-    {
-      "user": "wings_jo",
-      "score": 20
-    },
-    {
-      "user": "Hermione",
-      "score": 19
+      "user": "Player Three",
+      "score": 0
     }
   ]
 }
