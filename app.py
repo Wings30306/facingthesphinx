@@ -110,19 +110,26 @@ def next_question(question_number, score, user, message, user_answer, correct_an
 
 @app.route("/answers/<user>/question20/<score>/<message>/<user_answer>/<correct_answer>", methods=["POST"])
 def player_score_write_to_LB(score, user, message, user_answer, correct_answer):
-    if user == session['user']:
-        score=int(score)
-        player_score = {"user": user, "score": score}
-        player_score = (player_score)
-        with open("data/score.json", "r") as score_data:
-            player_score = {"user": user, "score": score}
-            leaderboard = json.load(score_data)
-            leaderboard["users"].append(player_score)
-            with open("data/score.json", "w") as score_data_updated:
-                json.dump(leaderboard, score_data_updated, indent=2)
-        return redirect(url_for('show_LB'))
+    score=int(score)
+    if score > 20:
+        return redirect(url_for('cheat'))
+    elif score < 0:
+        return redirect(url_for('cheat'))
+    elif score != int(score):
+        return redirect(url_for('cheat'))
     else:
-        return redirect(url_for("index"))
+        if user == session['user']:
+            player_score = {"user": user, "score": score}
+            player_score = (player_score)
+            with open("data/score.json", "r") as score_data:
+                player_score = {"user": user, "score": score}
+                leaderboard = json.load(score_data)
+                leaderboard["users"].append(player_score)
+                with open("data/score.json", "w") as score_data_updated:
+                    json.dump(leaderboard, score_data_updated, indent=2)
+            return redirect(url_for('show_LB'))
+        else:
+            return redirect(url_for("index"))
 
 
 @app.route("/leaderboard")
@@ -130,6 +137,12 @@ def show_LB():
   with open("data/score.json", "r", encoding="utf-8") as score_data:
     data = json.load(score_data)["users"]
   return render_template("leaderboard.html", scores=data)
+
+
+@app.route("/cheat")
+def cheat():
+    session.pop("user", None)
+    return render_template("cheat.html")
 
 
 @app.route("/log_out")
