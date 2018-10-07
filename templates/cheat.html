@@ -6,4 +6,8 @@
 <p>You'll have to <a href="{{url_for('sign_in')}}">sign in again</a> if you want to try playing again honestly.</p>
 <p>Be warned though, the Sphinx might not be so forgiving next time!</p>
 
+<h3>Wall of Shame</h3>
+{% for user in cheaters|sort(attribute='score', reverse=True) %}
+<p>{{ user.user|upper }} tried to cheat the Sphinx into giving them a score of {{ user.score }}.</p>
+{% endfor %}
 {% endblock %}

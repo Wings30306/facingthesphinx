@@ -112,6 +112,12 @@ def next_question(question_number, score, user, message, user_answer, correct_an
 def player_score_write_to_LB(score, user, message, user_answer, correct_answer):
     score=int(score)
     if score > 10:
+        with open("data/cheat.json", "r") as cheat_data:
+            cheat_score = {"user": user, "score": score}
+            cheaterboard = json.load(cheat_data)
+            cheaterboard["users"].append(cheat_score)
+            with open("data/cheat.json", "w") as score_data_updated:
+                json.dump(cheaterboard, score_data_updated, indent=2)
         return redirect(url_for('cheat'))
     elif score < 0:
         return redirect(url_for('cheat'))
@@ -141,8 +147,10 @@ def show_LB():
 
 @app.route("/cheat")
 def cheat():
+    with open("data/cheat.json", "r", encoding="utf-8") as cheat_data:
+        data = json.load(cheat_data)["users"]
     session.pop("user", None)
-    return render_template("cheat.html")
+    return render_template("cheat.html", cheaters=data)
 
 
 @app.route("/log_out")
