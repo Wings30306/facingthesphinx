@@ -108,10 +108,10 @@ def next_question(question_number, score, user, message, user_answer, correct_an
         return redirect(url_for("index"))
 
 
-@app.route("/answers/<user>/question20/<score>/<message>/<user_answer>/<correct_answer>", methods=["POST"])
+@app.route("/answers/<user>/question10/<score>/<message>/<user_answer>/<correct_answer>", methods=["POST"])
 def player_score_write_to_LB(score, user, message, user_answer, correct_answer):
     score=int(score)
-    if score > 20:
+    if score > 10:
         return redirect(url_for('cheat'))
     elif score < 0:
         return redirect(url_for('cheat'))
