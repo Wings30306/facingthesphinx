@@ -26,18 +26,24 @@ def show_register():
 
 @app.route("/register", methods=["POST"])
 def register():
-    session['user'] = request.form["new_user"]
-    user = session['user']
-    score = 0
-    question_number = 1
+    player = request.form["new_user"]
+    start_score = 0
+    start_question_number = 1
+    with open("data/riddles_shuffled.json", "r", encoding="utf-8") as riddle_data:
+        riddles_list = json.load(riddle_data)["riddles"]
     with open("data/users.txt", "r") as file:
         active_users = file.read().splitlines()
-        if user in active_users:
+        if player in active_users:
             register_message = "Sorry, this username is taken. Please choose a different username.\nAre you already registered? "
         else:
             file = open("data/users.txt", "a")
-            file.write(user + "\n")
-            return redirect(f"/riddles/{user}/question{question_number}/{score}")
+            file.write(player + "\n")
+            session['user'] = player
+            session['score'] = start_score
+            session['question_number'] = start_question_number
+            session['riddles'] = riddles_list
+            user = session['user']
+            return redirect(f"/riddles/{user}")
         return render_template("register.html", register_message=register_message)
 
 
@@ -48,85 +54,63 @@ def show_signin():
 
 @app.route("/signin", methods=["POST"])
 def sign_in():
-    new_user = request.form["username"]
-    score = 0
-    question_number = 1
+    player = request.form["username"]
+    start_score = 0
+    start_question_number = 1
+    with open("data/riddles_shuffled.json", "r", encoding="utf-8") as riddle_data:
+        riddles_list = json.load(riddle_data)["riddles"]
     with open("data/users.txt", "r") as file:
         active_users = file.read().splitlines()
-        if new_user in active_users:
-            session['user'] = new_user
+        if player in active_users:
+            session['user'] = player
+            session['score'] = start_score
+            session['question_number'] = start_question_number
+            session['riddles'] = riddles_list
             user = session['user']
-            return redirect(f"/riddles/{user}/question{question_number}/{score}")
+            return redirect(f"/riddles/{user}")
         else:
             signin_message = "Sorry, this username is incorrect. New user? "
             return render_template("signin.html", signin_message=signin_message)
 
 
-@app.route("/riddles/<user>/question<question_number>/<score>")
-def show_riddles(user, score, question_number):
+@app.route("/riddles/<user>")
+def show_riddles(user):
     if user == session['user']:
-        question_number = question_number
-        with open("data/riddles_shuffled.json", "r", encoding="utf-8") as riddle_data:
-            data = json.load(riddle_data)["riddles"]
+        question_number = session['question_number']
+        data = session['riddles']
+        score = session['score']
         return render_template('riddle.html', riddles=data, question_number=question_number, score=score)
     else:
         return redirect(url_for("index"))
 
 
-@app.route("/riddles/<user>/question<question_number>/<score>", methods=["POST"])
-def check_answer(score, question_number, user):
+@app.route("/riddles/<user>", methods=["POST"])
+def check_answer(user):
     if user == session['user']:
         correct_answer = request.form.get("correct_answer")
-        score = int(score)
         user_answer = request.form.get("guess").lower()
         if correct_answer in user_answer:
             message = "correct"
-            score += 1
+            session['score'] += 1
         else:
             message = "wrong"
-        return redirect(url_for("answer_result", user=user, message=message, user_answer=user_answer, correct_answer=correct_answer, score=score, question_number=question_number))
+        return redirect(url_for("answer_result", user=user, message=message, user_answer=user_answer, correct_answer=correct_answer))
     else:
         return redirect(url_for("index"))
 
 
-@app.route("/answers/<user>/question<question_number>/<score>/<message>/<user_answer>/<correct_answer>")
-def answer_result(user, message, user_answer, correct_answer, score, question_number):
+@app.route("/answers/<user>/<message>/<user_answer>/<correct_answer>")
+def answer_result(user, message, user_answer, correct_answer):
     if user == session['user']:
-        return render_template("answer.html", message=message, user_answer=user_answer, correct_answer=correct_answer, score=score, question_number=question_number, user=user)
+        return render_template("answer.html", message=message, user_answer=user_answer, correct_answer=correct_answer, score=session['score'], question_number=session['question_number'], user=user)
     else:
         return redirect(url_for("index"))
 
-@app.route("/answers/<user>/question<question_number>/<score>/<message>/<user_answer>/<correct_answer>", methods=["POST"])
-def next_question(question_number, score, user, message, user_answer, correct_answer):
+@app.route("/answers/<user>/<message>/<user_answer>/<correct_answer>", methods=["POST"])
+def next_question(user, message, user_answer, correct_answer):
     if user == session['user']:
-        question_number = int(question_number)
-        question_number += 1
-        score = score
-        user = user
-        return redirect(f"/riddles/{user}/question{question_number}/{score}")
-    else:
-        return redirect(url_for("index"))
-
-
-@app.route("/answers/<user>/question10/<score>/<message>/<user_answer>/<correct_answer>", methods=["POST"])
-def player_score_write_to_LB(score, user, message, user_answer, correct_answer):
-    score=int(score)
-    if score > 10:
-        with open("data/cheat.json", "r") as cheat_data:
-            cheat_score = {"user": user, "score": score}
-            cheaterboard = json.load(cheat_data)
-            cheaterboard["users"].append(cheat_score)
-            with open("data/cheat.json", "w") as score_data_updated:
-                json.dump(cheaterboard, score_data_updated, indent=2)
-        return redirect(url_for('cheat'))
-    elif score < 0:
-        return redirect(url_for('cheat'))
-    elif score != int(score):
-        return redirect(url_for('cheat'))
-    else:
-        if user == session['user']:
-            player_score = {"user": user, "score": score}
-            player_score = (player_score)
+        score = session['score']
+        if session['question_number'] == 10:
             with open("data/score.json", "r") as score_data:
                 player_score = {"user": user, "score": score}
                 leaderboard = json.load(score_data)
@@ -135,7 +119,10 @@ def player_score_write_to_LB(score, user, message, user_answer, correct_answer):
                     json.dump(leaderboard, score_data_updated, indent=2)
             return redirect(url_for('show_LB'))
         else:
-            return redirect(url_for("index"))
+            session['question_number'] += 1
+            return redirect(f"/riddles/{user}")
+    else:
+        return redirect(url_for("index"))
 
 
 @app.route("/leaderboard")
@@ -143,14 +130,6 @@ def show_LB():
   with open("data/score.json", "r", encoding="utf-8") as score_data:
     data = json.load(score_data)["users"]
   return render_template("leaderboard.html", scores=data)
-
-
-@app.route("/cheat")
-def cheat():
-    with open("data/cheat.json", "r", encoding="utf-8") as cheat_data:
-        data = json.load(cheat_data)["users"]
-    session.pop("user", None)
-    return render_template("cheat.html", cheaters=data)
 
 
 @app.route("/log_out")
@@ -172,4 +151,4 @@ def server_error(e):
 if __name__ == "__main__":
     app.run(host=os.getenv("IP"),
             port=os.getenv("PORT"),
-            debug=False)
+            debug=True)
