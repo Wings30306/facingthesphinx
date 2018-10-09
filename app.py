@@ -87,32 +87,31 @@ def show_riddles(user):
 @app.route("/riddles/<user>", methods=["POST"])
 def check_answer(user):
     if user == session['user']:
-        correct_answer = request.form.get("correct_answer")
-        user_answer = request.form.get("guess").lower()
-        if correct_answer in user_answer:
-            message = "correct"
+        session['correct_answer'] = request.form.get("correct_answer")
+        session['user_answer'] = request.form.get("guess").lower()
+        if session['correct_answer'] in session['user_answer']:
+            session['message'] = "correct"
             session['score'] += 1
         else:
-            message = "wrong"
-        return redirect(url_for("answer_result", user=user, message=message, user_answer=user_answer, correct_answer=correct_answer))
+            session['message'] = "wrong"
+        return redirect(url_for("answer_result", user=user))
     else:
         return redirect(url_for("index"))
 
 
-@app.route("/answers/<user>/<message>/<user_answer>/<correct_answer>")
-def answer_result(user, message, user_answer, correct_answer):
+@app.route("/answers/<user>")
+def answer_result(user):
     if user == session['user']:
-        return render_template("answer.html", message=message, user_answer=user_answer, correct_answer=correct_answer, score=session['score'], question_number=session['question_number'], user=user)
+        return render_template("answer.html", message=session['message'], user_answer=session['user_answer'], correct_answer=session['correct_answer'], score=session['score'], question_number=session['question_number'], user=user)
     else:
         return redirect(url_for("index"))
 
-@app.route("/answers/<user>/<message>/<user_answer>/<correct_answer>", methods=["POST"])
-def next_question(user, message, user_answer, correct_answer):
-    if user == session['user']:
-        score = session['score']
+@app.route("/answers/<user>", methods=["POST"])
+def next_question(user):
+    if user != session['user']:
         if session['question_number'] == 10:
             with open("data/score.json", "r") as score_data:
-                player_score = {"user": user, "score": score}
+                player_score = {"user": session['user'], "score": session['score']}
                 leaderboard = json.load(score_data)
                 leaderboard["users"].append(player_score)
                 with open("data/score.json", "w") as score_data_updated:
@@ -120,7 +119,7 @@ def next_question(user, message, user_answer, correct_answer):
             return redirect(url_for('show_LB'))
         else:
             session['question_number'] += 1
-            return redirect(f"/riddles/{user}")
+            return redirect(url_for('show_riddles', user=session['user']))
     else:
         return redirect(url_for("index"))
 
@@ -151,4 +150,4 @@ def server_error(e):
 if __name__ == "__main__":
     app.run(host=os.getenv("IP"),
             port=os.getenv("PORT"),
-            debug=False)
+            debug=True)
