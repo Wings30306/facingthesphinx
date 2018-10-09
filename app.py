@@ -110,7 +110,7 @@ def answer_result(user):
 @app.route("/answers/<user>", methods=["POST"])
 def next_question(user):
     if user != session['user']:
-        if session['question_number'] == 11:
+        if session['question_number'] >= 11:
             with open("data/score.json", "r") as score_data:
                 player_score = {"user": session['user'], "score": session['score']}
                 leaderboard = json.load(score_data)

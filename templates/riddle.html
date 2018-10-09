@@ -3,7 +3,7 @@
 {% block content %}
 <p><strong>Reminder:</strong> The sphinx looks for a specific keyword in your answer. You can phrase it any way you like: A full sentence, a phrase, a few words or if you're feeling very brave, try and guess the sphinx' expected keyword!</p>
 {% for riddle in riddles %}
-{% if loop.index == question_number|int %}
+{% if ( loop.index == question_number|int ) and ( loop.index <= 10 ) %}
 <p>{{loop.index}}. {{riddle.riddle}}</p>
 <form name="riddles" method="POST" action="">
   <div class="form-group">
