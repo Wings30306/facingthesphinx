@@ -89,6 +89,7 @@ def check_answer(user):
     if user == session['user']:
         session['correct_answer'] = request.form.get("correct_answer")
         session['user_answer'] = request.form.get("guess").lower()
+        session['question_number'] += 1
         if session['correct_answer'] in session['user_answer']:
             session['message'] = "correct"
             session['score'] += 1
@@ -109,7 +110,7 @@ def answer_result(user):
 @app.route("/answers/<user>", methods=["POST"])
 def next_question(user):
     if user != session['user']:
-        if session['question_number'] == 10:
+        if session['question_number'] == 11:
             with open("data/score.json", "r") as score_data:
                 player_score = {"user": session['user'], "score": session['score']}
                 leaderboard = json.load(score_data)
@@ -118,7 +119,6 @@ def next_question(user):
                     json.dump(leaderboard, score_data_updated, indent=2)
             return redirect(url_for('show_LB'))
         else:
-            session['question_number'] += 1
             return redirect(url_for('show_riddles', user=session['user']))
     else:
         return redirect(url_for("index"))
