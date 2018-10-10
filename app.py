@@ -2,7 +2,6 @@ import os
 from flask import Flask, render_template, redirect, request, url_for, session
 import json
 import random
-from shutil import copyfile
 
 app = Flask(__name__)
 app.secret_key=os.urandom(24)
@@ -10,12 +9,6 @@ app.secret_key=os.urandom(24)
 
 @app.route("/")
 def index():
-    copyfile("data/riddles.json", "data/riddles_shuffled.json")
-    with open("data/riddles_shuffled.json", "r") as riddle_data:
-        data = json.load(riddle_data)
-        random.shuffle(data["riddles"])
-        with open("data/riddles_shuffled.json", "w") as riddles_shuffled_updated:
-            json.dump(data, riddles_shuffled_updated, indent=2)
     return render_template("index.html")
 
 
@@ -29,8 +22,9 @@ def register():
     player = request.form["new_user"]
     start_score = 0
     start_question_number = 1
-    with open("data/riddles_shuffled.json", "r", encoding="utf-8") as riddle_data:
+    with open("data/riddles_shuffled.json", "r") as riddle_data:
         riddles_list = json.load(riddle_data)["riddles"]
+        random.shuffle(riddles_list)
     with open("data/users.txt", "r") as file:
         active_users = file.read().splitlines()
         if player in active_users:
