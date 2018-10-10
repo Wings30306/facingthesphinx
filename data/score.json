@@ -1,16 +1,4 @@
 {
   "users": [
-    {
-      "user": "Player One",
-      "score": 0
-    },
-    {
-      "user": "Player Two",
-      "score": 0
-    },
-    {
-      "user": "Player Three",
-      "score": 0
-    }
   ]
 }
