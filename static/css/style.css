@@ -1,5 +1,5 @@
 body { 
-  background: url("../images/ancient-art-cosmos-262786.jpg") no-repeat fixed center; 
+  background: rgba(0, 0, 0, 0) url("../images/ancient-art-cosmos-262786.jpg") no-repeat fixed center; 
   background-size: cover;
   color: #ffffff;
 }
@@ -13,7 +13,8 @@ body {
 .user-details {
   color: black;
   text-align: right;
-  display: inline-block;
+  display: block;
+  float: right;
 }
 
 .spacing-for-fixed-nav {
