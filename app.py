@@ -22,7 +22,7 @@ def register():
     player = request.form["new_user"]
     start_score = 0
     start_question_number = 1
-    with open("data/riddles_shuffled.json", "r") as riddle_data:
+    with open("data/riddles.json", "r") as riddle_data:
         riddles_list = json.load(riddle_data)["riddles"]
         random.shuffle(riddles_list)
     with open("data/users.txt", "r") as file:
@@ -51,8 +51,9 @@ def sign_in():
     player = request.form["username"]
     start_score = 0
     start_question_number = 1
-    with open("data/riddles_shuffled.json", "r", encoding="utf-8") as riddle_data:
+    with open("data/riddles.json", "r") as riddle_data:
         riddles_list = json.load(riddle_data)["riddles"]
+        random.shuffle(riddles_list)
     with open("data/users.txt", "r") as file:
         active_users = file.read().splitlines()
         if player in active_users:
