@@ -14,7 +14,7 @@
 <body>
   <header>
     <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-warning">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="{{url_for('index')}}">
         Facing The Sphinx
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -38,29 +38,40 @@
             <a class="nav-link" href="{{url_for('log_out')}}"">Log Out</a>
           </li>
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{url_for('show_LB')}}"">View Leaderboard</a>
+          <li class="
+              nav-item">
+              <a class="nav-link" href="{{url_for('show_LB')}}"">View Leaderboard</a>
           </li>
         </ul>
       </div>
+      <div class="user-details">
+        {% if session %}
+        <h5>User Details</h5>
+        <p>Username: {{session['user']}}<br>
+          Score: {{session['score']*10}}</p>
+        {% endif %}
+      </div>
+      
     </nav>
   </header>
-  <div class="spacing-for-fixed-nav"></div>
-  <section class="container">
-    <div class="content">
-      {% block content %}
-      {% endblock %}
-    </div>
-  </section>
-  <footer class="container-fluid">
-    <p>Game created by <a href="github.com/wings30306">Joke Heyndels</a>.</p>
-  </footer>
-  
+  <div class="
+                spacing-for-fixed-nav">
+      </div>
+      <section class="container">
+        <div class="content">
+          {% block content %}
+          {% endblock %}
+        </div>
+      </section>
+      <footer class="container-fluid">
+        <p>Game created by <a href="github.com/wings30306">Joke Heyndels</a>.</p>
+      </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.min.js"></script>
-  <script src="{{ url_for('static', filename='js/myscript.js') }}"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.min.js"></script>
+      <script src="{{ url_for('static', filename='js/myscript.js') }}"></script>
 
 </body>
 

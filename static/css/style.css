@@ -1,5 +1,5 @@
 body { 
-  background: lightblue url("../images/ancient-art-cosmos-262786.jpg") no-repeat fixed center; 
+  background: url("../images/ancient-art-cosmos-262786.jpg") no-repeat fixed center; 
   background-size: cover;
   color: #ffffff;
 }
@@ -8,6 +8,12 @@ body {
   font-weight: bold;
   font-family: cursive;
   font-size: 1.8em;
+}
+
+.user-details {
+  color: black;
+  text-align: right;
+  display: inline-block;
 }
 
 .spacing-for-fixed-nav {

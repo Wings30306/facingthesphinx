@@ -129,6 +129,12 @@ def show_LB():
 @app.route("/log_out")
 def log_out():
     session.pop("user", None)
+    session.pop("question_number", None)
+    session.pop("score", None)
+    session.pop("riddles", None)
+    session.pop("message", None)
+    session.pop("user_answer", None)
+    session.pop("correct_answer", None)
     return render_template("loggedout.html")
 
 
