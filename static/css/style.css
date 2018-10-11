@@ -1,7 +1,12 @@
 body { 
-  background: rgba(0, 0, 0, 0) url("../images/ancient-art-cosmos-262786.jpg") no-repeat fixed center; 
+  background: rgb(255, 193, 7) url("../images/ancient-art-cosmos-262786.jpg") no-repeat fixed center; 
   background-size: cover;
   color: #ffffff;
+}
+
+.my-nav {
+  margin: 0;
+  align-items: flex-start;
 }
 
 .navbar-brand {
