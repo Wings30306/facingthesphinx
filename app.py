@@ -101,25 +101,30 @@ def answer_result():
         return redirect(url_for("index"))
 
 @app.route("/answers", methods=["POST"])
-def next_question():
+def answer_buttons():
     if session:
         if session['question_number'] >= 11:
-            with open("data/score.json", "r") as score_data:
-                player_score = {"user": session['user'], "score": session['score']}
-                leaderboard = json.load(score_data)
-                leaderboard["users"].append(player_score)
-                with open("data/score.json", "w") as score_data_updated:
-                    json.dump(leaderboard, score_data_updated, indent=2)
-            return redirect(url_for('show_LB'))
+            write_to_LB()
         else:
-            return redirect(url_for('show_riddles'))
+            next_question()
     else:
         return redirect(url_for("index"))
 
 
 @app.route("/next_question", methods=["POST"])
-def redirect_to_next_question():
+def next_question():
     return redirect(url_for('show_riddles'))
+
+
+@app.route("/view_leaderboard", methods=["GET", "POST"])
+def write_to_LB():
+    with open("data/score.json", "r") as score_data:
+        player_score = {"user": session['user'], "score": session['score']}
+        leaderboard = json.load(score_data)
+        leaderboard["users"].append(player_score)
+        with open("data/score.json", "w") as score_data_updated:
+            json.dump(leaderboard, score_data_updated, indent=2)
+    return redirect(url_for('show_LB'))
 
 
 @app.route("/leaderboard")
