@@ -111,6 +111,13 @@ def answer_buttons():
         return redirect(url_for("index"))
 
 
+@app.route("/pass", methods=["GET", "POST"])
+def skip_question():
+    session['question_number'] += 1
+    next_question()
+
+
+
 @app.route("/next_question", methods=["POST"])
 def next_question():
     return redirect(url_for('show_riddles'))
