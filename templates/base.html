@@ -23,56 +23,62 @@
       </button>
       <div class="collapse navbar-collapse my-nav" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+          {% if session %}
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('index')}}">Home</a>
+            <a class="nav-link" href="{{url_for('show_riddles')}}">Home</a>
           </li>
-          {% if user == session["user"] %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('log_out')}}"">Log Out</a>
+          </li>
+          {% else %}
+          <li class="
+              nav-item">
+              <a class="nav-link" href="{{url_for('index')}}">Home</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('register')}}">Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('sign_in')}}">Log In</a>
           </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{url_for('log_out')}}"">Log Out</a>
-          </li>
+
           {% endif %}
           <li class="
               nav-item">
-              <a class="nav-link" href="{{url_for('show_LB')}}"">View Leaderboard</a>
+            <a class="nav-link" href="{{url_for('show_LB')}}"">View Leaderboard</a>
           </li>
         </ul>
       </div>
-      <div class="user-details">
-        {% if session %}
-        <h5>User Details</h5>
-        <p>Username: {{session['user']}}<br>
-          Score: {{session['score']*10}}</p>
-        {% endif %}
+      <div class="
+              user-details">
+              {% if session %}
+              <h5>User Details</h5>
+              <p>Username: {{session['user']}}<br>
+                Score: {{session['score']*10}}</p>
+              {% endif %}
       </div>
-      
+
     </nav>
   </header>
   <div class="
                 spacing-for-fixed-nav">
-      </div>
-      <section class="container">
-        <div class="content">
-          {% block content %}
-          {% endblock %}
-        </div>
-      </section>
-      <footer class="container-fluid">
-        <p>Game created by <a href="github.com/wings30306">Joke Heyndels</a>.</p>
-      </footer>
-
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.min.js"></script>
-      {% block customscript %}
+  </div>
+  <section class="container">
+    <div class="content">
+      {% block content %}
       {% endblock %}
+    </div>
+  </section>
+  <footer class="container-fluid">
+    <p>Game created by <a href="github.com/wings30306">Joke Heyndels</a>.</p>
+  </footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.min.js"></script>
+  {% block customscript %}
+  {% endblock %}
 </body>
 
 </html>
