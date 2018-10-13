@@ -23,14 +23,14 @@ body {
 }
 
 .spacing-for-fixed-nav {
-  height: 12vh;
+  height: 150px;
 }
 
 .content {
   background-color: rgba(0, 0, 0, 0.4);
   padding: 20px 30px;
   border-radius: 20px;
-  min-height: 80vh;
+  min-height: 60vh;
 }
 
 a, strong {
