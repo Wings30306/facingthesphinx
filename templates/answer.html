@@ -24,3 +24,7 @@
   </form>
 {% endif %}
 {% endblock %}
+
+{% block customscript %}
+<script src="{{ url_for('static', filename='js/myscript.js') }}"></script>
+{% endblock %}
