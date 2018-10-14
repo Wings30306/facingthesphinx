@@ -53,16 +53,18 @@
               user-details">
               {% if session %}
               <h5>User Details</h5>
-              <p>Username: {{session['user']}}<br>
+              <p>Username: {{session['user']|title}}<br>
                 Score: {{session['score']*10}}</p>
               {% endif %}
       </div>
 
     </nav>
   </header>
-  <div class="
-                spacing-for-fixed-nav">
-  </div>
+  {% if session %}
+  <div class="spacing-for-fixed-nav-session"></div>
+  {% else %}
+  <div class="spacing-for-fixed-nav-standard"></div>
+  {% endif %}
   <section class="container">
     <div class="content">
       {% block content %}

@@ -2,7 +2,7 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
-<h2>Meet The Sphinx!</h2>
+<h2>{% if session %}{{session['user']|title}}, Come and {% endif %}Meet The Sphinx!</h2>
 <p>
   A sphinx is a mythical creature
   with the head of a human and the body of a lion.

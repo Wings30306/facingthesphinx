@@ -2,8 +2,17 @@
 {% block title %}Leaderboard{% endblock %}
 {% block content %}
 
+
 <h2>Leaderboard</h2>
 {% if scores %}
+{% if session %}
+{% if session['question_number'] == 11 %}
+<p>Well done for finishing the game,  {{session['user']|title}}! Let's find out where you rank!</p>
+{% elif session['question_number'] <= 10 %}
+<p>Hello, {{session['user']|title}}, come to check out the competition? Let's see, you currently have {{session['score']*10}} points...</p>
+<p><a href="{{url_for('show_riddles')}}" class="btn btn-lg btn-warning">Continue playing!</a></p>
+{% endif %}
+{% endif %}
 <table>
   <tr>
     <th>Rank</th>
@@ -22,7 +31,7 @@
 <h3>NO SCORES YET</h3>
 <p>Do you want to be the first to make it onto the scoreboard?</p>
 {% if session %}
-<p><a href="{{ url_for('show_riddles') }}" class="btn btn-lg btn-warning">Play Now</a></p>
+<p><a href="{{ url_for('show_riddles') }}" class="btn btn-lg btn-warning">Continue Playing</a></p>
 {% else %}
 <p><a href="{{ url_for('register')}}">Register</a> or <a href="{{ url_for('sign_in') }}">Sign In</a> to play!</p>
 {% endif %}
