@@ -10,8 +10,9 @@
 
 </form>
 <p class="message">
-{% if register_message %} 
-{{ register_message }}<a href="{{url_for('sign_in')}}">Sign In Here</a>
+{% if register_message = "taken" %} 
+Sorry, this username is taken. Please choose a different username.
+</p><p>Are you already registered? <a href="{{url_for('sign_in')}}">Sign In Here</a>
 {% endif %}
 </p>
 <p>
