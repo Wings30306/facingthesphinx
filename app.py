@@ -19,7 +19,7 @@ def show_register():
 
 @app.route("/register", methods=["POST"])
 def register():
-    player = request.form["new_user"]
+    player = request.form["new_user"].lower()
     start_score = 0
     start_question_number = 1
     with open("data/riddles.json", "r") as riddle_data:
@@ -47,7 +47,7 @@ def show_signin():
 
 @app.route("/signin", methods=["POST"])
 def sign_in():
-    player = request.form["username"]
+    player = request.form["username"].lower()
     start_score = 0
     start_question_number = 1
     with open("data/riddles.json", "r") as riddle_data:
