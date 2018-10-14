@@ -4,7 +4,7 @@ import json
 import random
 
 app = Flask(__name__)
-app.secret_key=os.urandom(24)
+app.secret_key = os.urandom(24)
 
 
 @app.route("/")
@@ -14,7 +14,7 @@ def index():
 
 @app.route("/register")
 def show_register():
-  return render_template("register.html")
+    return render_template("register.html")
 
 
 @app.route("/register", methods=["POST"])
@@ -28,7 +28,7 @@ def register():
     with open("data/users.txt", "r") as file:
         active_users = file.read().splitlines()
         if player in active_users:
-            register_message = "Sorry, this username is taken. Please choose a different username.\nAre you already registered? "
+            message = "taken"
         else:
             file = open("data/users.txt", "a")
             file.write(player + "\n")
@@ -37,12 +37,13 @@ def register():
             session['question_number'] = start_question_number
             session['riddles'] = riddles_list
             return redirect(f"/riddles")
-        return render_template("register.html", register_message=register_message)
+        return render_template("register.html",
+                               register_message=message)
 
 
 @app.route("/signin")
 def show_signin():
-  return render_template("signin.html")
+    return render_template("signin.html")
 
 
 @app.route("/signin", methods=["POST"])
@@ -62,8 +63,8 @@ def sign_in():
             session['riddles'] = riddles_list
             return redirect(f"/riddles")
         else:
-            signin_message = "Sorry, this username is incorrect. New user? "
-            return render_template("signin.html", signin_message=signin_message)
+            message = "Sorry, this username is incorrect. New user? "
+            return render_template("signin.html", signin_message=message)
 
 
 @app.route("/riddles")
@@ -72,7 +73,10 @@ def show_riddles():
         question_number = session['question_number']
         data = session['riddles']
         score = session['score']
-        return render_template('riddle.html', riddles=data, question_number=question_number, score=score)
+        return render_template('riddle.html',
+                               riddles=data,
+                               question_number=question_number,
+                               score=score)
     else:
         return redirect(url_for("index"))
 
@@ -96,9 +100,16 @@ def check_answer():
 @app.route("/answers")
 def answer_result():
     if session:
-        return render_template("answer.html", message=session['message'], user_answer=session['user_answer'], correct_answer=session['correct_answer'], score=session['score'], question_number=session['question_number'], user=session['user'])
+        return render_template("answer.html",
+                               message=session['message'],
+                               user_answer=session['user_answer'],
+                               correct_answer=session['correct_answer'],
+                               score=session['score'],
+                               question_number=session['question_number'],
+                               user=session['user'])
     else:
         return redirect(url_for("index"))
+
 
 @app.route("/answers", methods=["POST"])
 def answer_buttons():
@@ -115,7 +126,6 @@ def answer_buttons():
 def skip_question():
     session['question_number'] += 1
     next_question()
-
 
 
 @app.route("/next_question", methods=["POST"])
@@ -136,9 +146,9 @@ def write_to_LB():
 
 @app.route("/leaderboard")
 def show_LB():
-  with open("data/score.json", "r", encoding="utf-8") as score_data:
-    data = json.load(score_data)["users"]
-  return render_template("leaderboard.html", scores=data)
+    with open("data/score.json", "r", encoding="utf-8") as score_data:
+        data = json.load(score_data)["users"]
+    return render_template("leaderboard.html", scores=data)
 
 
 @app.route("/log_out")
