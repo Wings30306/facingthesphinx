@@ -1,5 +1,6 @@
-body { 
-  background: rgb(255, 193, 7) url("../images/ancient-art-cosmos-262786.jpg") no-repeat fixed center; 
+body {
+  background: rgb(255, 193, 7) url("../images/ancient-art-cosmos-262786.jpg")
+    no-repeat fixed center;
   background-size: cover;
   color: #ffffff;
 }
@@ -17,12 +18,14 @@ body {
 
 .user-details {
   color: black;
-  text-align: right;
-  display: block;
-  float: right;
+  text-align: left;
 }
 
-.spacing-for-fixed-nav {
+.spacing-for-fixed-nav-standard {
+  height: 100px;
+}
+
+.spacing-for-fixed-nav-session {
   height: 150px;
 }
 
@@ -33,8 +36,9 @@ body {
   min-height: 60vh;
 }
 
-a, strong {
-  color: rgb(255, 193, 7)
+a,
+strong {
+  color: rgb(255, 193, 7);
 }
 
 a:hover {
@@ -42,12 +46,12 @@ a:hover {
   text-decoration: none;
 }
 
-form input, form textarea{
+form input,
+form textarea {
   background-color: rgba(255, 255, 255, 0.4);
   font-weight: bold;
   font-size: larger;
 }
-
 
 .hidden {
   display: none;
@@ -58,17 +62,20 @@ form input, form textarea{
 }
 
 .btn-warning:hover,
-.nav-link:hover{
+.nav-link:hover {
   font-weight: bold;
 }
 
-table{
+table {
   width: 90%;
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.4);
   text-align: center;
 }
 
-footer{
+footer {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
 }
