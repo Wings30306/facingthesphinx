@@ -22,7 +22,7 @@
   {% for user in scores|sort(attribute='score', reverse=True) %}
   <tr>
     <td>{{loop.index}}</td>
-    <td>{{user.user}}</td>
+    <td>{{user.user|title}}</td>
     <td>{{user.score * 10}}</td>
   </tr>
   {%endfor%}
