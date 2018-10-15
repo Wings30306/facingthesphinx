@@ -39,7 +39,13 @@
 </p>
 <p>Are you ready to start?</p>
 {% if session %}
+{% if session['question_number'] == 1 %}
 <p><a href="{{ url_for('show_riddles') }}" class="btn btn-lg btn-warning">Play Now</a></p>
+{% elif session['question_number'] == 11 %}
+<p><a href="{{ url_for('play_again') }}" class="btn btn-lg btn-warning">Play Again</a></p>
+{% else %}
+<p><a href="{{ url_for('show_riddles') }}" class="btn btn-lg btn-warning">Continue Playing</a></p>
+{% endif %}
 {% else %}
 <a href="{{url_for('register')}}" class="btn btn-lg btn-warning">Register</a>
 <a href="{{url_for('sign_in')}}" class="btn btn-lg btn-warning">Log In</a>

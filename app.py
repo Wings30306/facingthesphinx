@@ -67,6 +67,17 @@ def sign_in():
             return render_template("signin.html", signin_message=message)
 
 
+@app.route("/playagain")
+def play_again():
+    with open("data/riddles.json", "r") as riddle_data:
+        riddles_list = json.load(riddle_data)["riddles"]
+        random.shuffle(riddles_list)
+    session['score'] = 0
+    session['question_number'] = 1
+    session['riddles'] = riddles_list
+    return redirect(f"/riddles")
+
+
 @app.route("/riddles")
 def show_riddles():
     if session:
