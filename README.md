@@ -73,31 +73,39 @@ No custom automated testing has been done on this project, but the validity of P
 
 For the user stories, the manual testing process is as follows: 
 - As a visitor, I would like to know more about the theme of the website. I may not know of the Sphinx and its role in mythology / fantasy, so some explanation would be nice.
-  - Simply visit the [home page](https://facing-the-sphinx.herokuapp.com) to see this.
+  - *Simply visit the [home page](https://facing-the-sphinx.herokuapp.com) to see this.*
 - As a visitor, I would like to have a look at the scoreboard to see how other players have done; it would be a good gauge to find out how difficult the game is before I play.
-  - In the navbar at the top of the page, click "View Leaderboard". Due to Heroku's issue with file persistency, it is possible that the leaderboard doesn't show any current scores.
+  - *In the navbar at the top of the page, click "View Leaderboard". Due to Heroku's issue with file persistency, it is possible that the leaderboard doesn't show any current scores.*
 - As a new player, I would like to register a username so I can play the game.
+  - *Go to the Register page. You can do this from the Nav Bar, the index page or the leaderboard page, all of which have links inviting visitors to sign up and play.*
+  - *First, to check that it's a required field, try leaving the Your Username field blank. You will be asked to "fill in this field".*
+  - *Fill in a username of your choice. You will be redirected to the riddles page if successful.*
+  - *To test the unique-username feature, log out (via Nav Bar) and try to register again using the same username. You will be told the username already exists. Would you like to choose another or sign in instead?*
 - As an existing player, I would like to be able to simply sign in with my existing username instead of having to make up a new one every time.
+  - *Go to the Log In page. You can do this from the Nav Bar, the index page or the leaderboard page, all of which have links inviting visitors to log in and play. Alternatively, you can use the link provided in the Register page after testing that you can't register twice with the same username.*
+  - *First, to check that it's a required field, try leaving the Your Username field blank. You will be asked to "fill in this field".*
+  - *Then, try to sign up with a username that's not registered yet. A random string of characters is generally best to avoid accidentally using someone else's username. You will be shown a message telling you this username is incorrect, did you want to register instead?*
+  *Lastly, log in with the username you registered earlier. You will be redirected to the first riddle.*
 - As a player, I would like to answer some riddles, after all that's what the game is about.
-  - Once you are registered/signed in, you will be redirected to the next question.
+  - *Once you are registered/signed in, you will be redirected to the next question.*
 - As a player, I would like to earn points for correct answers.
-  - If you don't want to answer questions yourself, you can:
-    - paste in this text for a guaranteed correct answer every time: "Tomorrow, I will go to grandfather. I’ve found a different stamp with an image of fire and a needle. Grandma will be playing cards or sleep, so I’ll be in trouble if my breath or footsteps break the silence. History taught me that a knock on the keyboard is no joke. I can see my reflection when I feed some seeds to the spider and the snail." 
-    - Simply leave the field empty or put in "test" for a "wrong answer".
+  - *If you don't want to answer questions yourself, you can:*
+    - *paste in this text for a guaranteed correct answer every time:* "Tomorrow, I will go to grandfather. I’ve found a different stamp with an image of fire and a needle. Grandma will be playing cards or sleep, so I’ll be in trouble if my breath or footsteps break the silence. History taught me that a knock on the keyboard is no joke. I can see my reflection when I feed some seeds to the spider and the snail." 
+    - *Simply leave the field empty or put in "test" for a "wrong answer".*
 - As a player, I would like to know where I am in the game; how many questions are left after the one I've just answered?
-  - Every time a question is answered, the page that shows you whether you're wrong or correct will also show a countdown of the number of questions left to answer.
+  - *Every time a question is answered, the page that shows you whether you're wrong or correct will also show a countdown of the number of questions left to answer.*
 - As a player, I would like to be able to skip a question if I don't know the answer.
-  - Answer can be left open; it's not a required field. 
+  - *Answer can be left open; it's not a required field.* 
 - Also, if I skip a question or get the answer wrong, I would like to know the correct answer the game was expecting.
-  - The answer page will display the keyword the app was looking for. 
+  - *The answer page will display the keyword the app was looking for.*
 - As a player, I would like to be able to see my current score at all times.
-  - When a player is in session, their username and score will be displayed in the header (navbar)
+  - *When a player is in session, their username and score will be displayed in the header (navbar).*
 - As a player, I would like to see where I rank on the leaderboard once I finish the game. 
-  - On the answer page of the last question, the button that redirects to "Next Question" normally will redirect you to the leaderboard as well as display your score.
+  - *On the answer page of the last question, the button that redirects to "Next Question" normally will redirect you to the leaderboard as well as display your score.*
 
 ## Deployment
 
-As this project runs on Python, it was hosted on Heroku. To be able to run the code on Heroku, a Procfile was added, as were the Config vars for IP and PORT.
+As this project runs on Python, it was hosted on Heroku. To be able to run the code on Heroku, a Procfile was added to tell Heroku it's a Python project (web: python app.py), as were the Config vars for IP (0.0.0.0) and PORT (5000).
 
 To run the code locally, you can simply clone the [Github Repo](https://github.com/Wings30306/facingthesphinx/) and run it in your own editor. Install the depencies from the requirements file. There are no hidden keys in this project that would need to be added. 
 
@@ -115,4 +123,4 @@ Have fun!
 ### Acknowledgements
 
 - I would like to thank my fellow students for their encouragement, tips and bug reporting along the way, with special mentions for [Simen Daehlin](https://github.com/Eventyret), [Duncan Falconer](https://github.com/ddeveloper72), [Miroslav Svec](https://github.com/MiroslavSvec), [Tim Nelson](https://github.com/TravelTimN) and [Chris Quinn](https://github.com/10xOXR).
-- The JavaScript finction for disabling the back button on "answers" was found on [CodePen](https://codepen.io/dhavalt10/pen/rGLBzB) and created by [Dhaval Thakkar](https://codepen.io/dhavalt10/).
+- The JavaScript function for disabling the back button on "answers" was found on [CodePen](https://codepen.io/dhavalt10/pen/rGLBzB) and created by [Dhaval Thakkar](https://codepen.io/dhavalt10/).
