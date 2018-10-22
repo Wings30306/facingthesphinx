@@ -8,6 +8,7 @@ body {
 
 .my-nav {
   margin: 0;
+  padding: 5px;
   align-items: flex-start;
 }
 
@@ -19,8 +20,10 @@ body {
 
 .user-details {
   color: black;
-  text-align: left;
+  text-align: center;
 }
+
+
 
 .spacing-for-fixed-nav-standard {
   height: 100px;
@@ -32,9 +35,9 @@ body {
 
 .content {
   background-color: rgba(0, 0, 0, 0.4);
-  padding: 20px 30px;
-  border-radius: 20px;
-  min-height: 80vh;
+  padding: 10px 10px;
+  border-radius: 10px;
+  min-height: 60vh;
   margin-bottom: 3em;
 }
 
@@ -83,4 +86,21 @@ footer {
   height: 60px;
   line-height: 60px;
   z-index: -1;
+}
+
+@media only screen and (min-width: 992px) {
+  .spacing-for-fixed-nav-standard {
+    height: 80px;
+  }
+  
+  .spacing-for-fixed-nav-session {
+    height: 120px;
+  }
+
+  .content {
+    padding: 20px 30px;
+    border-radius: 20px;
+    min-height: 80vh;
+    margin-bottom: 3em;
+  }
 }
