@@ -23,8 +23,6 @@ body {
   text-align: center;
 }
 
-
-
 .spacing-for-fixed-nav-standard {
   height: 100px;
 }
@@ -92,7 +90,7 @@ footer {
   .spacing-for-fixed-nav-standard {
     height: 80px;
   }
-  
+
   .spacing-for-fixed-nav-session {
     height: 120px;
   }
