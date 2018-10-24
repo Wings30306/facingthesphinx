@@ -108,6 +108,18 @@ def check_answer():
         return redirect(url_for("index"))
 
 
+@app.route("/skip_question")
+def skip():
+    session['question_number'] += 1
+    if session:
+        if session['question_number'] >= 11:
+            return write_to_LB()
+        else:
+            return next_question()
+    else:
+        return redirect(url_for("index")) 
+
+
 @app.route("/answers")
 def answer_result():
     if session:
