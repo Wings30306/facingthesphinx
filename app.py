@@ -25,8 +25,8 @@ def register():
     with open("data/riddles.json", "r") as riddle_data:
         riddles_list = json.load(riddle_data)["riddles"]
         random.shuffle(riddles_list)
-    with open("data/users.txt", "r") as file:
-        active_users = file.read().splitlines()
+    with open("data/users.txt", "r") as userfile:
+        active_users = userfile.read().splitlines()
         if player in active_users:
             message = "taken"
         else:
@@ -54,8 +54,8 @@ def sign_in():
     with open("data/riddles.json", "r") as riddle_data:
         riddles_list = json.load(riddle_data)["riddles"]
         random.shuffle(riddles_list)
-    with open("data/users.txt", "r") as file:
-        active_users = file.read().splitlines()
+    with open("data/users.txt", "r") as userfile:
+        active_users = userfile.read().splitlines()
         if player in active_users:
             session['user'] = player
             session['score'] = start_score
@@ -131,12 +131,6 @@ def answer_buttons():
             next_question()
     else:
         return redirect(url_for("index"))
-
-
-@app.route("/pass", methods=["GET", "POST"])
-def skip_question():
-    session['question_number'] += 1
-    next_question()
 
 
 @app.route("/next_question", methods=["POST"])
