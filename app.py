@@ -115,6 +115,7 @@ def skip():
         if session['question_number'] >= 11:
             return write_to_LB()
         else:
+            session['message'] = "skipped"
             return next_question()
     else:
         return redirect(url_for("index")) 
