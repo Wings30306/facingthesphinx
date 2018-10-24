@@ -16,7 +16,7 @@ I'm sorry you had to skip the last question, {{ session['user']|title}}.</p><p>I
   keyword!</p>
   <hr>
 {% for riddle in riddles %}
-{% if ( loop.index == question_number|int ) and ( loop.index <= 10 ) %} <p>{{loop.index}}. {{riddle.riddle}}</p>
+{% if ( loop.index == question_number|int ) and ( loop.index <= 10 ) %} <p>{{loop.index}}. {{riddle.riddle|safe}}</p>
   <form name="riddles" method="POST" action="">
     <div class="form-group">
       <input class="field hidden" type="text" name="question_number" id="question_number" placeholder="Question Number"
@@ -26,7 +26,7 @@ I'm sorry you had to skip the last question, {{ session['user']|title}}.</p><p>I
       <input class="field hidden" type="text" name="correct_answer" id="correct_answer" placeholder="Your answer" value="{{ riddle.answer }}">
     </div>
     <div class="form-group">
-      <input class="field" type="text" name="guess" id="guess" placeholder="Your answer">
+      <input class="field" type="text" name="guess" id="guess" placeholder="Your answer" required>
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-warning btn-lg" value="user_answer">Submit</button>

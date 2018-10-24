@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, redirect, request, url_for, session
 import json
 import random
+from jinja2 import evalcontextfilter, Markup, escape
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -22,7 +23,7 @@ def register():
     player = request.form["new_user"].lower()
     start_score = 0
     start_question_number = 1
-    with open("data/riddles.json", "r") as riddle_data:
+    with open("data/riddles.json", "r", encoding="utf-8") as riddle_data:
         riddles_list = json.load(riddle_data)["riddles"]
         random.shuffle(riddles_list)
     with open("data/users.txt", "r") as userfile:
@@ -54,7 +55,7 @@ def sign_in():
     with open("data/riddles.json", "r") as riddle_data:
         riddles_list = json.load(riddle_data)["riddles"]
         random.shuffle(riddles_list)
-    with open("data/users.txt", "r") as userfile:
+    with open("data/users.txt", "r", encoding="utf-8") as userfile:
         active_users = userfile.read().splitlines()
         if player in active_users:
             session['user'] = player
@@ -69,7 +70,7 @@ def sign_in():
 
 @app.route("/playagain")
 def play_again():
-    with open("data/riddles.json", "r") as riddle_data:
+    with open("data/riddles.json", "r", encoding="utf-8)") as riddle_data:
         riddles_list = json.load(riddle_data)["riddles"]
         random.shuffle(riddles_list)
     session['score'] = 0
@@ -110,8 +111,8 @@ def check_answer():
 
 @app.route("/skip_question")
 def skip():
-    session['question_number'] += 1
     if session:
+        session['question_number'] += 1
         if session['question_number'] >= 11:
             return write_to_LB()
         else:
