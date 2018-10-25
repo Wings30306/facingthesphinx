@@ -16,7 +16,10 @@
   keyword!</p>
   <hr>
 {% for riddle in riddles %}
-{% if ( loop.index == question_number|int ) and ( loop.index <= 10 ) %} <p>{{loop.index}}. {{riddle.riddle|safe}}</p>
+{% if ( loop.index == question_number|int ) and ( loop.index <= 10 ) %} 
+<div class="riddle">
+  <p>{{loop.index}}. {{riddle.riddle|safe}}</p>
+</div>
   <form name="riddles" method="POST" action="">
     <div class="form-group">
       <input class="field hidden" type="text" name="question_number" id="question_number" placeholder="Question Number"

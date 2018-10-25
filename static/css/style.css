@@ -38,6 +38,13 @@ body {
   margin-bottom: 3em;
 }
 
+.riddle {
+  text-align: center;
+  margin: 0 auto; 
+  font-weight: bold;
+  font-style: italic
+}
+
 a,
 strong {
   color: rgb(255, 193, 7);
