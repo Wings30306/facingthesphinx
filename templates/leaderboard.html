@@ -8,6 +8,7 @@
 {% if session %}
 {% if session['question_number'] == 11 %}
 <p>Well done for finishing the game,  {{session['user']|title}}! Let's find out where you rank!</p>
+<p><a href="{{ url_for('play_again') }}" class="btn btn-lg btn-warning">Play Again</a></p>
 {% elif session['question_number'] <= 10 %}
 <p>Hello, {{session['user']|title}}, come to check out the competition? Let's see, you currently have {{session['score']*10}} points...</p>
 <p><a href="{{url_for('show_riddles')}}" class="btn btn-lg btn-warning">Continue playing!</a></p>
