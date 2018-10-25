@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if session['message'] == "skipped" %}
-I'm sorry you had to skip the last question, {{ session['user']|title}}.</p><p>I hope you have better luck with this one!
+<p>I'm sorry you had to skip the last question, {{ session['user']|title}}.</p><p>I hope you have better luck with this one!</p>
 <hr>
 {% endif %}
 {% if question_number == 1 %}

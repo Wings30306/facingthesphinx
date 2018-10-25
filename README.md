@@ -18,14 +18,9 @@ If you wish to play, the title above is a link to the active application on Hero
 - As a player, I would like to earn points for correct answers.
 - As a player, I would like to know where I am in the game; how many questions are left after the one I've just answered?
 - As a player, I would like to be able to skip a question if I don't know the answer.
-- Also, if I skip a question or get the answer wrong, I would like to know the correct answer the game was expecting. 
+- As a player, if I get the answer wrong, I would like to know the correct answer the game was expecting. 
 - As a player, I would like to be able to see my current score at all times.
 - As a player, I would like to see where I rank on the leaderboard once I finish the game. 
-
-
-### Wireframes, Diagrams and Mock-Ups
-
-
 
 ## Features
  
@@ -91,12 +86,13 @@ For the user stories, the manual testing process is as follows:
 - As a player, I would like to earn points for correct answers.
   - *If you don't want to answer questions yourself, you can:*
     - *paste in this text for a guaranteed correct answer every time:* "Tomorrow, I will go to grandfather. I’ve found a different stamp with an image of fire and a needle. Grandma will be playing cards or sleep, so I’ll be in trouble if my breath or footsteps break the silence. History taught me that a knock on the keyboard is no joke. I can see my reflection when I feed some seeds to the spider and the snail." 
-    - *Simply leave the field empty or put in "test" for a "wrong answer".*
+    - *Simply put in "test" for a "wrong answer".*
+    - *This is a required field so you might also want to try testing this by leaving it blank and attempting to submit*
 - As a player, I would like to know where I am in the game; how many questions are left after the one I've just answered?
   - *Every time a question is answered, the page that shows you whether you're wrong or correct will also show a countdown of the number of questions left to answer.*
 - As a player, I would like to be able to skip a question if I don't know the answer.
-  - *Answer can be left open; it's not a required field.* 
-- Also, if I skip a question or get the answer wrong, I would like to know the correct answer the game was expecting.
+  - *Click the 'Skip' button, it will take you directly to the next question.* 
+- As a player, if I get the answer wrong, I would like to know the correct answer the game was expecting.
   - *The answer page will display the keyword the app was looking for.*
 - As a player, I would like to be able to see my current score at all times.
   - *When a player is in session, their username and score will be displayed in the header (navbar).*
