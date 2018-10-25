@@ -2,7 +2,6 @@ import os
 from flask import Flask, render_template, redirect, request, url_for, session
 import json
 import random
-from jinja2 import evalcontextfilter, Markup, escape
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
