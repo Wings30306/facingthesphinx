@@ -1,11 +1,24 @@
 {% extends 'base.html'%}
+
 {% block title %}Riddle{% endblock %}
+
 {% block content %}
 
+<!--This block of text will display if the user skips the previous question-->
 {% if session['message'] == "skipped" %}
-<p>I'm sorry you had to skip the last question, {{ session['user']|title}}.</p><p>I hope you have better luck with this one!</p>
+<p>I'm sorry you had to skip the last question, {{ session['user']|title}}. In case you'd like to know, the keyword the
+  Sphinx was expecting was <strong>
+    {% for riddle in riddles %}
+    {% if ( loop.index == question_number|int - 1 ) %}
+    {{riddle.answer}}
+    {% endif %}
+    {% endfor %}
+  </strong>.</p>
+<p>I hope you have better luck with this one!</p>
 <hr>
 {% endif %}
+
+<!--Display riddle-->
 {% if question_number == 1 %}
 <p>Welcome, {{ session['user']|title }}! Are you ready for your first riddle? Good luck!</p>
 {% elif question_number == 10 %}
@@ -14,12 +27,13 @@
 <p><strong>Reminder:</strong> The sphinx looks for a specific keyword in your answer. You can phrase it any way you
   like: A full sentence, a phrase, a few words or if you're feeling very brave, try and guess the sphinx' expected
   keyword!</p>
-  <hr>
+<hr>
 {% for riddle in riddles %}
-{% if ( loop.index == question_number|int ) and ( loop.index <= 10 ) %} 
-<div class="riddle">
+{% if ( loop.index == question_number|int ) and ( loop.index <= 10 ) %} <div class="riddle">
   <p>{{loop.index}}. {{riddle.riddle|safe}}</p>
-</div>
+  </div>
+
+  <!--Answer form-->
   <form name="riddles" method="POST" action="">
     <div class="form-group">
       <input class="field hidden" type="text" name="question_number" id="question_number" placeholder="Question Number"
@@ -37,7 +51,6 @@
     </div>
   </form>
   {% endif %}
-
   {% endfor %}
 
   {% endblock%}
