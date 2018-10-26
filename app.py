@@ -118,7 +118,7 @@ def skip():
             session['message'] = "skipped"
             return next_question()
     else:
-        return redirect(url_for("index")) 
+        return redirect(url_for("index"))
 
 
 @app.route("/answers")
