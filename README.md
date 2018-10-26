@@ -24,7 +24,9 @@ If you wish to play, the title above is a link to the active application on Hero
 
 ### Diagrams and Thought Process
 I do my best start-up thinking with simple pen(cil) and paper, so hopefully these images will give you a bit of an insight into the thought process that came with the building of this site.
+
 ![Wireframe / Site Diagram](wireframes/diagram.jpg "Site Diagram")
+
 ![Thought Process](wireframes/thought-process.jpg "Thought Process")
 
 ## Features
