@@ -4,43 +4,44 @@
 
 
 <h2>Leaderboard</h2>
+<!--Different information will be displayed here based on whether there's data in the score file and where the user is in their game-->
 {% if scores %}
 {% if session %}
 {% if session['question_number'] == 11 %}
-<p>Well done for finishing the game,  {{session['user']|title}}! Let's find out where you rank!</p>
+<p>Well done for finishing the game, {{session['user']|title}}! Let's find out where you rank!</p>
 <p><a href="{{ url_for('play_again') }}" class="btn btn-lg btn-warning">Play Again</a></p>
-{% elif session['question_number'] <= 10 %}
-<p>Hello, {{session['user']|title}}, come to check out the competition? Let's see, you currently have {{session['score']*10}} points...</p>
-<p><a href="{{url_for('show_riddles')}}" class="btn btn-lg btn-warning">Continue playing!</a></p>
-{% endif %}
-{% endif %}
-<table>
-  <tr>
-    <th>Rank</th>
-    <th>Name</th>
-    <th>Score</th>
-  </tr>
-  {% for user in scores|sort(attribute='score', reverse=True) %}
-  <tr>
-    <td>{{loop.index}}</td>
-    <td>{{user.user|title}}</td>
-    <td>{{user.score * 10}}</td>
-  </tr>
-  {%endfor%}
-</table>
-{% else %}
-<h3>NO SCORES YET</h3>
-<p>Do you want to be the first to make it onto the scoreboard?</p>
-{% if session %}
-{% if session['question_number'] == 1 %}
-<p><a href="{{ url_for('show_riddles') }}" class="btn btn-lg btn-warning">Play Now</a></p>
-{% elif session['question_number'] == 11 %}
-<p><a href="{{ url_for('play_again') }}" class="btn btn-lg btn-warning">Play Again</a></p>
-{% else %}
-<p><a href="{{ url_for('show_riddles') }}" class="btn btn-lg btn-warning">Continue Playing</a></p>
-{% endif %}
-{% else %}
-<p><a href="{{ url_for('register')}}">Register</a> or <a href="{{ url_for('sign_in') }}">Sign In</a> to play!</p>
-{% endif %}
-{% endif %}
-{% endblock %}
+{% elif session['question_number'] <= 10 %} <p>Hello, {{session['user']|title}}, come to check out the competition?
+  Let's see, you currently have {{session['score']*10}} points...</p>
+  <p><a href="{{url_for('show_riddles')}}" class="btn btn-lg btn-warning">Continue playing!</a></p>
+  {% endif %}
+  {% endif %}
+  <table>
+    <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
+    {% for user in scores|sort(attribute='score', reverse=True) %}
+    <tr>
+      <td>{{loop.index}}</td>
+      <td>{{user.user|title}}</td>
+      <td>{{user.score * 10}}</td>
+    </tr>
+    {%endfor%}
+  </table>
+  {% else %}
+  <h3>NO SCORES YET</h3>
+  <p>Do you want to be the first to make it onto the scoreboard?</p>
+  {% if session %}
+  {% if session['question_number'] == 1 %}
+  <p><a href="{{ url_for('show_riddles') }}" class="btn btn-lg btn-warning">Play Now</a></p>
+  {% elif session['question_number'] == 11 %}
+  <p><a href="{{ url_for('play_again') }}" class="btn btn-lg btn-warning">Play Again</a></p>
+  {% else %}
+  <p><a href="{{ url_for('show_riddles') }}" class="btn btn-lg btn-warning">Continue Playing</a></p>
+  {% endif %}
+  {% else %}
+  <p><a href="{{ url_for('register')}}">Register</a> or <a href="{{ url_for('sign_in') }}">Sign In</a> to play!</p>
+  {% endif %}
+  {% endif %}
+  {% endblock %}

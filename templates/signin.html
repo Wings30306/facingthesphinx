@@ -2,20 +2,23 @@
 {% block title %}Sign In{% endblock %}
 {% block content %}
 
- <h2>Already registered?<br>Sign in here to play!</h2>
- <form name="signin" method="POST" action="/signin">
- 
+<h2>Already registered?<br>Sign in here to play!</h2>
+<form name="signin" method="POST" action="/signin">
   <input type="text" name="username" id="username" placeholder="Your username" required>
   <button type="submit" class="btn btn-warning btn-lg" value="signin">Let's answer some riddles!</button>
-  <p class="message">
+</form>
+
+<!--This message will display if a username is not yet registered.-->
+<p class="message">
   {% if signin_message %}
   {{ signin_message }}<a href="{{url_for('register')}}">Register here</a>.
   {% endif %}
-  </p>
+</p>
 
-  <p>
-    <strong>Warning: </strong>This site is not secured, please don't put in privacy-sensitive information! Usernames will be displayed
-    on the leaderboard.</p>
-</form>
+<p>
+  <strong>Warning: </strong>This site is not secured, please don't put in privacy-sensitive information! Usernames will
+  be displayed
+  on the leaderboard.</p>
+
 
 {% endblock %}

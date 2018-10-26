@@ -4,19 +4,22 @@
 
 <h2>Not yet registered?<br>Please choose a username!</h2>
 <form name="register" method="POST" action="/register">
-
   <input type="text" name="new_user" id="new_user" placeholder="Your username" required>
   <button type="submit" class="btn btn-warning btn-lg" value="register">Sign up!</button>
-
 </form>
+
+<!--Message will display if someone's already using the chosen username.-->
 <p class="message">
-{% if register_message == "taken" %} 
-Sorry, this username is taken. Please choose a different username.
-</p><p>Are you already registered? <a href="{{url_for('sign_in')}}">Sign In Here</a>
-{% endif %}
+  {% if register_message == "taken" %}
+  Sorry, this username is taken. Please choose a different username.
+</p>
+
+<p>Are you already registered? <a href="{{url_for('sign_in')}}">Sign In Here</a>
+  {% endif %}
 </p>
 <p>
-  <strong>Warning: </strong>This site is not secured, please don't put in privacy-sensitive information! Usernames will be
+  <strong>Warning: </strong>This site is not secured, please don't put in privacy-sensitive information! Usernames will
+  be
   displayed on the leaderboard.</p>
 
 {% endblock %}

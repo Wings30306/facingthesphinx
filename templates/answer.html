@@ -1,32 +1,36 @@
 {% extends 'base.html'%}
 {% block title %}Answer{% endblock %}
 {% block content %}
+
+<!--Display user's answer and let them know whether it was correct-->
 <p>Your answer was <strong>{{user_answer}}</strong>.</p>
 <p>The Sphinx expected an answer with the keyword <strong>{{correct_answer}}</strong>.</p>
 <p>That means your answer was <strong> {{message}}</strong>!</p>
 <hr>
-{% if question_number|int < 11 %}
-<h5>You have currently answered {{score}} out of {{question_number|int - 1}} 
-  {% if question_number|int - 1 == 1 %} 
-  question 
-  {% else %} 
-  questions 
-  {% endif %} 
-  correctly! 
+
+<!--Tells the user their score so far and where they are in the game-->
+{% if question_number|int < 11 %} <h5>You have currently answered {{score}} out of {{question_number|int - 1}}
+  {% if question_number|int - 1 == 1 %}
+  question
+  {% else %}
+  questions
+  {% endif %}
+  correctly!
   {{11-question_number|int}}{% if question_number|int == 10 %} question {% else %} questions {% endif %} left to go.</h5>
   <hr>
-<form name="next_question" method="POST" action="next_question">
-  <button type="submit" name="next_question" class="btn btn-warning btn-lg">Next Question</button>
-</form>
-{% else %}
-<h5>You have currently answered {{score}} out of {{question_number - 1}} questions correctly!</h5>
-<hr>
- <form name="view_leaderboard" method="POST" action="view_leaderboard">
+  <form name="next_question" method="POST" action="next_question">
+    <button type="submit" name="next_question" class="btn btn-warning btn-lg">Next Question</button>
+  </form>
+  {% else %}
+  <h5>You have currently answered {{score}} out of {{question_number - 1}} questions correctly!</h5>
+  <hr>
+  <form name="view_leaderboard" method="POST" action="view_leaderboard">
     <button type="submit" name="view_leaderboard" class="btn btn-warning btn-lg">Go To Leaderboard</button>
   </form>
-{% endif %}
-{% endblock %}
+  {% endif %}
+  {% endblock %}
 
-{% block customscript %}
-<script src="{{ url_for('static', filename='js/myscript.js') }}"></script>
-{% endblock %}
+  <!--Disables the backbutton to prevent cheating-->
+  {% block customscript %}
+  <script src="{{ url_for('static', filename='js/myscript.js') }}"></script>
+  {% endblock %}

@@ -12,6 +12,8 @@
 
 <body>
   <header>
+
+    <!--Navbar will display different information based on whether user is logged in, actively playing, finished or logged out-->
     <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-warning my-nav">
       <a class="navbar-brand" href="{{url_for('index')}}">
         Facing The Sphinx
@@ -67,17 +69,21 @@
   {% else %}
   <div class="spacing-for-fixed-nav-standard"></div>
   {% endif %}
+    
+  <!--Templates inserted here-->
   <section class="container">
     <div class="content">
       {% block content %}
       {% endblock %}
     </div>
   </section>
+
+  <!--Footer-->
   <footer class="container-fluid footer">
     <p>Game created by <a href="https://github.com/wings30306" target="_blank">Joke Heyndels</a>.</p>
   </footer>
 
-
+  <!--Scripts-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.min.js"></script>
