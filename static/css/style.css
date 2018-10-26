@@ -1,3 +1,4 @@
+/* Body background */
 body {
   background: rgb(255, 193, 7) url("../images/ancient-art-cosmos-262786.jpg")
     no-repeat fixed center;
@@ -6,6 +7,7 @@ body {
   min-height: 100vh;
 }
 
+/* Header */
 .my-nav {
   margin: 0;
   padding: 0 5px;
@@ -30,19 +32,24 @@ body {
   height: 150px;
 }
 
+/* Footer */
+footer {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  z-index: -1;
+}
+
+/* General Lay-Out */
 .content {
   background-color: rgba(0, 0, 0, 0.4);
   padding: 10px 10px;
   border-radius: 10px;
   min-height: 60vh;
   margin-bottom: 3em;
-}
-
-.riddle {
-  text-align: center;
-  margin: 0 auto; 
-  font-weight: bold;
-  font-style: italic
 }
 
 a,
@@ -55,11 +62,23 @@ a:hover {
   text-decoration: none;
 }
 
-form input,
-form textarea {
+.btn-warning:hover,
+.nav-link:hover {
+  font-weight: bold;
+}
+
+form input {
   background-color: rgba(255, 255, 255, 0.4);
   font-weight: bold;
   font-size: larger;
+}
+
+/* Riddle Page */
+.riddle {
+  text-align: center;
+  margin: 0 auto;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .hidden {
@@ -70,11 +89,7 @@ form textarea {
   width: 100%;
 }
 
-.btn-warning:hover,
-.nav-link:hover {
-  font-weight: bold;
-}
-
+/* Leaderboard Page */
 table {
   width: 90%;
   margin: 0 auto;
@@ -82,16 +97,7 @@ table {
   text-align: center;
 }
 
-footer {
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-  z-index: -1;
-}
-
+/* Responsiveness */
 @media only screen and (min-width: 992px) {
   .my-nav {
     padding: 0 100px;
