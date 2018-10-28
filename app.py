@@ -19,7 +19,29 @@ def page_not_found(e):
 """Server Error"""
 @app.errorhandler(500)
 def server_error(e):
-    return render_template('500.html'), 500
+    return render_template('500.html'), 500 
+
+
+"""Read User File"""
+def users():
+    with open("data/users.txt", "r") as userfile:
+        active_users = userfile.read().splitlines()
+        return active_users
+
+
+"""Create questions list"""
+def shuffle_riddles():
+    with open("data/riddles.json", "r", encoding="utf-8") as riddle_data:
+        riddles_list = json.load(riddle_data)["riddles"]
+        random.shuffle(riddles_list)
+        return riddles_list
+
+
+"""Read Score file"""
+def scores():
+    with open("data/score.json", "r", encoding="utf-8") as score_data:
+        data = json.load(score_data)
+        return data
 
 
 """APP ROUTES"""
@@ -42,20 +64,17 @@ def register():
     player = request.form["new_user"].lower()
     start_score = 0
     start_question_number = 1
-    with open("data/riddles.json", "r", encoding="utf-8") as riddle_data:
-        riddles_list = json.load(riddle_data)["riddles"]
-        random.shuffle(riddles_list)
     with open("data/users.txt", "r") as userfile:
         active_users = userfile.read().splitlines()
         if player in active_users:
             message = "taken"
         else:
-            file = open("data/users.txt", "a")
-            file.write(player + "\n")
+            userfile = open("data/users.txt", "a")
+            userfile.write(player + "\n")
             session['user'] = player
             session['score'] = start_score
             session['question_number'] = start_question_number
-            session['riddles'] = riddles_list
+            session['riddles'] = shuffle_riddles()
             return redirect(url_for("show_riddle"))
         return render_template("register.html",
                                register_message=message)
@@ -73,16 +92,13 @@ def sign_in():
     player = request.form["username"].lower()
     start_score = 0
     start_question_number = 1
-    with open("data/riddles.json", "r") as riddle_data:
-        riddles_list = json.load(riddle_data)["riddles"]
-        random.shuffle(riddles_list)
     with open("data/users.txt", "r", encoding="utf-8") as userfile:
         active_users = userfile.read().splitlines()
         if player in active_users:
             session['user'] = player
             session['score'] = start_score
             session['question_number'] = start_question_number
-            session['riddles'] = riddles_list
+            session['riddles'] = shuffle_riddles()
             return redirect(f"/riddle")
         else:
             message = "Sorry, this username is incorrect. New user? "
@@ -92,12 +108,9 @@ def sign_in():
 """Resets score and question number and creates new riddle list if user in session wants to play again"""
 @app.route("/playagain")
 def reset():
-    with open("data/riddles.json", "r", encoding="utf-8)") as riddle_data:
-        riddles_list = json.load(riddle_data)["riddles"]
-        random.shuffle(riddles_list)
     session['score'] = 0
     session['question_number'] = 1
-    session['riddles'] = riddles_list
+    session['riddles'] = shuffle_riddles()
     return redirect(f"/riddle")
 
 
