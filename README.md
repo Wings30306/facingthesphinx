@@ -63,8 +63,6 @@ Other technologies used in this project are:
   - for writing the basic front-end content
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), a stylesheet language
   - for styling the page
-- [JavaScript](https://www.javascript.com/)
-  - This only has minimal use in the project: it is only used to disable the backbutton to prevent cheating.
 - [JQuery](https://jquery.com)
   - for allowing the Javascript functionality in Bootstrap and my custom [script](static/js/myscript) to work.
 - [Bootstrap](http://getbootstrap.com/), a front-end framework
@@ -101,7 +99,9 @@ For the user stories, the manual testing process is as follows:
 - As a player, I would like to know where I am in the game; how many questions are left after the one I've just answered?
   - _Every time a question is answered, the page that shows you whether you're wrong or correct will also show a countdown of the number of questions left to answer._
 - As a player, I would like to be able to skip a question if I don't know the answer.
-  - _Click the 'Skip' button, it will take you directly to the next question._
+  - _Click the 'Skip' button, it will take you directly to the next question and display the correct answer, or to the leaderboard if it was the last question._
+- As a player, I would like to be able to quit the game without answering all questions in case I run out of time.
+    - _Click the 'End Game', it will save your current score and take you directly to the leaderboard._
 - As a player, if I get the answer wrong, I would like to know the correct answer the game was expecting.
   - _The answer page will display the keyword the app was looking for._
 - As a player, I would like to be able to see my current score at all times.
@@ -113,7 +113,10 @@ For the user stories, the manual testing process is as follows:
 
 As this project runs on Python, it was hosted on Heroku. To be able to run the code on Heroku, a Procfile was added to tell Heroku it's a Python project (web: python app.py), as were the Config vars for IP (0.0.0.0) and PORT (5000).
 
-To run the code locally, you can simply clone the [Github Repo](https://github.com/Wings30306/facingthesphinx/) and run it in your own editor. Install the depencies from the requirements file. There are no hidden keys in this project that would need to be added.
+To run the code locally:
+1. Clone the [Github Repo](https://github.com/Wings30306/facingthesphinx/) and run it in your own editor. 
+1. Set your environment variables. The IP address for local host is **127.0.0.1**. The PORT should be **5000**.
+1. Install the depencies from the requirements file using the command **pip install -r requirements.txt**.
 
 Have fun!
 
