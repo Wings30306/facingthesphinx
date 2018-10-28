@@ -9,10 +9,10 @@
 {% if session %}
 {% if session['question_number'] == 11 %}
 <p>Well done for finishing the game, {{session['user']|title}}! Let's find out where you rank!</p>
-<p><a href="{{ url_for('play_again') }}" class="btn btn-lg btn-warning">Play Again</a></p>
+<p><a href="{{ url_for('reset') }}" class="btn btn-lg btn-warning">Play Again</a></p>
 {% elif session['question_number'] <= 10 %} <p>Hello, {{session['user']|title}}, come to check out the competition?
   Let's see, you currently have {{session['score']*10}} points...</p>
-  <p><a href="{{url_for('show_riddles')}}" class="btn btn-lg btn-warning">Continue playing!</a></p>
+  <p><a href="{{url_for('show_riddle')}}" class="btn btn-lg btn-warning">Continue playing!</a></p>
   {% endif %}
   {% endif %}
   <table>
@@ -34,11 +34,11 @@
   <p>Do you want to be the first to make it onto the scoreboard?</p>
   {% if session %}
   {% if session['question_number'] == 1 %}
-  <p><a href="{{ url_for('show_riddles') }}" class="btn btn-lg btn-warning">Play Now</a></p>
+  <p><a href="{{ url_for('show_riddle') }}" class="btn btn-lg btn-warning">Play Now</a></p>
   {% elif session['question_number'] == 11 %}
-  <p><a href="{{ url_for('play_again') }}" class="btn btn-lg btn-warning">Play Again</a></p>
+  <p><a href="{{ url_for('reset') }}" class="btn btn-lg btn-warning">Play Again</a></p>
   {% else %}
-  <p><a href="{{ url_for('show_riddles') }}" class="btn btn-lg btn-warning">Continue Playing</a></p>
+  <p><a href="{{ url_for('show_riddle') }}" class="btn btn-lg btn-warning">Continue Playing</a></p>
   {% endif %}
   {% else %}
   <p><a href="{{ url_for('register')}}">Register</a> or <a href="{{ url_for('sign_in') }}">Sign In</a> to play!</p>
