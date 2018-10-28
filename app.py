@@ -109,7 +109,7 @@ def sign_in():
         if player in active_users:
             session['user'] = player
             start()
-            return redirect(f"/riddle")
+            return redirect(url_for("show_riddle"))
         else:
             message = "Sorry, this username is incorrect. New user? "
         return render_template("signin.html", signin_message=message)
@@ -120,7 +120,7 @@ def sign_in():
 def reset():
     if session: 
         start()
-        return redirect(f"/riddle")
+        return redirect(url_for("show_riddle"))
     else:
         return redirect(url_for("index"))
 
