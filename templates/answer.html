@@ -32,7 +32,3 @@
     <button type="submit" name="answer" class="btn btn-warning btn-lg">{% if question_number|int < 11 %} Next Question {% else %} Go To Leaderboard {% endif %} </button> 
   </form> 
   {% endblock %} 
-  <!--Disables the backbutton to prevent cheating-->
-  {% block customscript %}
-  <script src="{{ url_for('static', filename='js/myscript.js') }}"></script>
-  {% endblock %}
