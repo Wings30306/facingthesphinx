@@ -62,22 +62,19 @@ def show_register():
 @app.route("/register", methods=["POST"])
 def register():
     player = request.form["new_user"].lower()
-    start_score = 0
-    start_question_number = 1
-    with open("data/users.txt", "r") as userfile:
-        active_users = userfile.read().splitlines()
-        if player in active_users:
-            message = "taken"
-        else:
-            userfile = open("data/users.txt", "a")
-            userfile.write(player + "\n")
-            session['user'] = player
-            session['score'] = start_score
-            session['question_number'] = start_question_number
-            session['riddles'] = shuffle_riddles()
-            return redirect(url_for("show_riddle"))
-        return render_template("register.html",
-                               register_message=message)
+    active_users = users()
+    if player in active_users:
+        message = "taken"
+    else:
+        userfile = open("data/users.txt", "a")
+        userfile.write(player + "\n")
+        session['user'] = player
+        session['score'] = 0
+        session['question_number'] = 1
+        session['riddles'] = shuffle_riddles()
+        return redirect(url_for("show_riddle"))
+    return render_template("register.html",
+                            register_message=message)
 
 
 """Displays Log-In Page"""
@@ -90,28 +87,28 @@ def show_signin():
 @app.route("/signin", methods=["POST"])
 def sign_in():
     player = request.form["username"].lower()
-    start_score = 0
-    start_question_number = 1
-    with open("data/users.txt", "r", encoding="utf-8") as userfile:
-        active_users = userfile.read().splitlines()
-        if player in active_users:
-            session['user'] = player
-            session['score'] = start_score
-            session['question_number'] = start_question_number
-            session['riddles'] = shuffle_riddles()
-            return redirect(f"/riddle")
-        else:
-            message = "Sorry, this username is incorrect. New user? "
-            return render_template("signin.html", signin_message=message)
+    active_users = users()
+    if player in active_users:
+        session['user'] = player
+        session['score'] = 0
+        session['question_number'] = 1
+        session['riddles'] = shuffle_riddles()
+        return redirect(f"/riddle")
+    else:
+        message = "Sorry, this username is incorrect. New user? "
+        return render_template("signin.html", signin_message=message)
 
 
 """Resets score and question number and creates new riddle list if user in session wants to play again"""
 @app.route("/playagain")
 def reset():
-    session['score'] = 0
-    session['question_number'] = 1
-    session['riddles'] = shuffle_riddles()
-    return redirect(f"/riddle")
+    if session: 
+        session['score'] = 0
+        session['question_number'] = 1
+        session['riddles'] = shuffle_riddles()
+        return redirect(f"/riddle")
+    else:
+        return redirect(url_for("index"))
 
 
 """Displays Riddle Page"""
@@ -190,28 +187,32 @@ def redirecting_from_answer_page():
 """Writes username and score to leaderboard at end of game"""
 @app.route("/leaderboard", methods=["GET", "POST"])
 def write_to_LB():
-    with open("data/score.json", "r") as score_data:
+    if session: 
         player_score = {"user": session['user'], "score": session['score']}
-        leaderboard = json.load(score_data)
+        leaderboard = scores()
         leaderboard["users"].append(player_score)
         with open("data/score.json", "w") as score_data:
             json.dump(leaderboard, score_data, indent=2)
-    return redirect(url_for('show_LB'))
+        return redirect(url_for('show_LB'))
+    else:
+        return redirect(url_for("index"))
 
 
 """Displays Leaderboard Page"""
 @app.route("/view_leaderboard")
 def show_LB():
-    with open("data/score.json", "r", encoding="utf-8") as score_data:
-        data = json.load(score_data)["users"]
+    data=scores()["users"]
     return render_template("leaderboard.html", scores=data)
 
 
 """Clears Session And Displays Log-Out Page"""
 @app.route("/log_out")
 def log_out():
-    session.clear()
-    return render_template("loggedout.html")
+    if session:
+        session.clear()
+        return render_template("loggedout.html")
+    else:
+        return redirect(url_for("index"))
 
 
 """Runs application"""
