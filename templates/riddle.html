@@ -5,7 +5,7 @@
 {% block content %}
 
 <!--This block of text will display if the user skips the previous question-->
-{% if session['message'] == "skipped" %}
+{% if session['message'] == "skipped" and question_number != 1 %}
 <p>I'm sorry you had to skip the last question, {{ session['user']|title}}. In case you'd like to know, the keyword the
   Sphinx was expecting was <strong>
     {% for riddle in riddles %}
