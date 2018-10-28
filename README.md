@@ -133,4 +133,4 @@ Have fun!
 ### Acknowledgements
 
 - I would like to thank my fellow students for their encouragement, tips and bug reporting along the way, with special mentions for [Simen Daehlin](https://github.com/Eventyret), [Duncan Falconer](https://github.com/ddeveloper72), [Miroslav Svec](https://github.com/MiroslavSvec), [Tim Nelson](https://github.com/TravelTimN) and [Chris Quinn](https://github.com/10xOXR).
-- The JavaScript function for disabling the back button on "answers" was found on [CodePen](https://codepen.io/dhavalt10/pen/rGLBzB) and created by [Dhaval Thakkar](https://codepen.io/dhavalt10/).
+- Many thanks to my mentor Matthijs De Bruin and Code Institute's Head of Learning Success Yoni Lavi for their tips.
