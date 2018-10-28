@@ -63,43 +63,55 @@ def index():
 """Displays Register Page"""
 @app.route("/register")
 def show_register():
-    return render_template("register.html")
+    if session:
+        return redirect(url_for("index"))
+    else:
+        return render_template("register.html")
 
 
 """Writes User Input To File; Redirects to Riddles"""
 @app.route("/register", methods=["POST"])
 def register():
-    player = request.form["new_user"].lower()
-    active_users = users()
-    if player in active_users:
-        message = "taken"
+    if session:
+        return redirect(url_for("index"))
     else:
-        userfile = open("data/users.txt", "a")
-        userfile.write(player + "\n")
-        session['user'] = player
-        start()
-        return redirect(url_for("show_riddle"))
-    return render_template("register.html",
-                            register_message=message)
+        player = request.form["new_user"].lower()
+        active_users = users()
+        if player in active_users:
+            message = "taken"
+        else:
+            userfile = open("data/users.txt", "a")
+            userfile.write(player + "\n")
+            session['user'] = player
+            start()
+            return redirect(url_for("show_riddle"))
+        return render_template("register.html",
+                                register_message=message)
 
 
 """Displays Log-In Page"""
 @app.route("/signin")
 def show_signin():
-    return render_template("signin.html")
+    if session:
+        return redirect(url_for("index"))
+    else:
+        return render_template("signin.html")
 
 
 "Create session for registered user, shows warning if user is not yet registered."
 @app.route("/signin", methods=["POST"])
 def sign_in():
-    player = request.form["username"].lower()
-    active_users = users()
-    if player in active_users:
-        session['user'] = player
-        start()
-        return redirect(f"/riddle")
+    if session:
+        return redirect(url_for("index"))
     else:
-        message = "Sorry, this username is incorrect. New user? "
+        player = request.form["username"].lower()
+        active_users = users()
+        if player in active_users:
+            session['user'] = player
+            start()
+            return redirect(f"/riddle")
+        else:
+            message = "Sorry, this username is incorrect. New user? "
         return render_template("signin.html", signin_message=message)
 
 
