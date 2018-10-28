@@ -1,3 +1,6 @@
 .venv 
 .vscode
 __pycache__
+
+data/score.json
+data/users.txt
