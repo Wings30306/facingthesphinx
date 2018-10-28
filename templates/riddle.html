@@ -14,8 +14,15 @@
     {% endif %}
     {% endfor %}
   </strong>.</p>
+  {% if question_number <= 10 %}
 <p>I hope you have better luck with this one!</p>
 <hr>
+  {% else %}
+  <p>Well done on finishing the game, {{ session['user']|title}}</p>
+  <a href="{{ url_for('show_LB') }}" class="btn btn-warning btn-lg">Go To Leaderboard</a>
+  <a href="{{ url_for('reset') }}" class="btn btn-warning btn-lg">Play Again</a>
+  <a href="{{ url_for('index') }}" class="btn btn-warning btn-lg">Home</a>
+{% endif %}
 {% endif %}
 
 <!--Display riddle-->
@@ -24,10 +31,12 @@
 {% elif question_number == 10 %}
 <p>And now the last question, {{ session['user']|title}}!</p>
 {% endif %}
+{% if question_number <= 10 %}
 <p><strong>Reminder:</strong> The sphinx looks for a specific keyword in your answer. You can phrase it any way you
   like: A full sentence, a phrase, a few words or if you're feeling very brave, try and guess the sphinx' expected
   keyword!</p>
 <hr>
+{% endif %}
 {% for riddle in riddles %}
 {% if ( loop.index == question_number|int ) and ( loop.index <= 10 ) %} <div class="riddle">
   <p>{{loop.index}}. {{riddle.riddle|safe}}</p>
