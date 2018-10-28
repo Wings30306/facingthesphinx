@@ -37,6 +37,14 @@ def shuffle_riddles():
         return riddles_list
 
 
+"""set start of game variables"""
+def start():
+    session['score'] = 0
+    session['question_number'] = 1
+    session['riddles'] = shuffle_riddles()
+    return session['score'], session['question_number'], session['riddles']
+
+
 """Read Score file"""
 def scores():
     with open("data/score.json", "r", encoding="utf-8") as score_data:
@@ -69,9 +77,7 @@ def register():
         userfile = open("data/users.txt", "a")
         userfile.write(player + "\n")
         session['user'] = player
-        session['score'] = 0
-        session['question_number'] = 1
-        session['riddles'] = shuffle_riddles()
+        start()
         return redirect(url_for("show_riddle"))
     return render_template("register.html",
                             register_message=message)
@@ -90,9 +96,7 @@ def sign_in():
     active_users = users()
     if player in active_users:
         session['user'] = player
-        session['score'] = 0
-        session['question_number'] = 1
-        session['riddles'] = shuffle_riddles()
+        start()
         return redirect(f"/riddle")
     else:
         message = "Sorry, this username is incorrect. New user? "
@@ -103,9 +107,7 @@ def sign_in():
 @app.route("/playagain")
 def reset():
     if session: 
-        session['score'] = 0
-        session['question_number'] = 1
-        session['riddles'] = shuffle_riddles()
+        start()
         return redirect(f"/riddle")
     else:
         return redirect(url_for("index"))
