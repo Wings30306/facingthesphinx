@@ -190,6 +190,7 @@ def redirecting_from_answer_page():
 @app.route("/leaderboard", methods=["GET", "POST"])
 def write_to_LB():
     if session: 
+        session['question_number']=11
         player_score = {"user": session['user'], "score": session['score']}
         leaderboard = scores()
         leaderboard["users"].append(player_score)

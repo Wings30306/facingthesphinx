@@ -30,5 +30,6 @@
   {% endif %}
   <form name="answer_redirect" method="POST" action="answer_redirect">
     <button type="submit" name="answer" class="btn btn-warning btn-lg">{% if question_number|int < 11 %} Next Question {% else %} Go To Leaderboard {% endif %} </button> 
+    <a href="{{ url_for('write_to_LB') }}" class="btn btn-warning btn-lg">End Game</a>
   </form> 
   {% endblock %} 
