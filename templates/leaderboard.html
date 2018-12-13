@@ -22,12 +22,14 @@
       <th>Score</th>
     </tr>
     {% for user in scores|sort(attribute='score', reverse=True) %}
+    {% if loop.index <= 5 %}
     <tr>
       <td>{{loop.index}}</td>
       <td>{{user.user|title}}</td>
       <td>{{user.score * 10}}</td>
     </tr>
-    {%endfor%}
+    {% endif %}
+    {% endfor %}
   </table>
   {% else %}
   <h3>NO SCORES YET</h3>
