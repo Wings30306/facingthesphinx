@@ -4,3 +4,4 @@ __pycache__
 
 data/score.json
 data/users.txt
+.vscode/settings.json
